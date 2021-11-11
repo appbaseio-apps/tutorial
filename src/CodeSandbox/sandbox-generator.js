@@ -38,67 +38,43 @@ const html = `<!DOCTYPE html>
 const geoHtml = `
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit=no"/>
-  <meta name="theme-color" content="#000000" />
-  <title>Tutorial | appbase.io</title>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyA9JzjtHeXg_C_hh_GdTBdLxREWdj3nsOU"
+    ></script>
+    <title>React App</title>
+  </head>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css" rel="stylesheet" />
-
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="preload" as="style" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-
-  <script type="text/javascript"
-    src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyA9JzjtHeXg_C_hh_GdTBdLxREWdj3nsOU">
-    </script>
-
-  <style media="screen">
-    html {
-      --scroll-bar: #d0d0d0;
-    }
-
-    #help {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      display: inline;
-      z-index: 100;
-    }
-
-    /* for browsers supporting webkit */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--scroll-bar);
-      border-radius: 8px;
-    }
-
-    ::-webkit-scrollbar-button {
-      display: none;
-    }
-  </style>
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
-
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+  </body>
 </html>
-`
+
+`;
+
 const index = `import React from "react";
 import ReactDOM from "react-dom";
 
@@ -108,7 +84,38 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 `;
 
-const generateAppCode = ({ searchCode, filtersCode, resultCode, app }) => {
+const renderHeading = (app) => {
+    if(app === 'movies-demo-app') {
+        return `
+        <h2 className="header-heading">
+            The Movies Store{' '}
+            <span role="img" aria-label="books">
+                🎥
+            </span>
+        </h2>
+        `
+    } else if(app === 'ecomm-demo-app') {
+        return `
+        <h2 className="header-heading">
+            The Products Store{' '}
+            <span role="img" aria-label="books">
+                💻
+            </span>
+        </h2>
+    `
+    } else {
+        return `
+        <h2 className="header-heading">
+            The Geo Data{' '}
+            <span role="img" aria-label="books">
+                🌎
+            </span>
+        </h2>
+        `
+    }
+}
+
+const generateAppCode = ({ searchCode, filtersCode, resultCode, app, facetFields }) => {
 	return `
 import React from 'react';
 import {
@@ -135,6 +142,7 @@ const App = () => {
             credentials="${credentials}" 
             enableAppbase url="${url}"
             className="search-app"
+            mapKey="AIzaSyA9JzjtHeXg_C_hh_GdTBdLxREWdj3nsOU"
             theme={{
                 colors: {
                     primaryColor: '#FF307A',
@@ -147,23 +155,15 @@ const App = () => {
                 textAlign: 'left',
             }}
         >
-			<header>
-                <h2>
-                    The Movies Store{' '}
-                    <span role="img" aria-label="books">
-                        🎥
-                    </span>
-                </h2>
+			<header className="header-container">
+                ${renderHeading(app)}
                 ${searchCode}
             </header>
-                <SelectedFilters />
-				<div>
-					${filtersCode}
-				</div>
-				<div>	
-					${resultCode}
-				</div>
-
+            <SelectedFilters style={{ marginTop: 20 }} showClearAll={false} />
+            <div className="multi-col">
+                <div className="left-col">${filtersCode}</div>
+                ${resultCode}
+            </div>				
 		</ReactiveBase>
 	)
 };
@@ -174,6 +174,86 @@ export default App;
 
 const styles = (hasFilters) => `body {
   margin: 0;
+}
+
+header {
+    h2 {
+        margin: 0 0 6px 0;
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 42px;
+    }
+    p {
+        margin: 15px 0;
+        font-size: 18px;
+        line-height: 28px; // max-width: 550px;
+    }
+    img {
+        width: 70px;
+    }
+}
+
+.header-container {
+    width: 100%;
+    margin: 0;
+    padding: 3rem 6rem;
+    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+}
+
+.header-heading {
+    color: #424242;
+    text-align: center;
+    letter-spacing: 0.06rem;
+    margin-bottom: 12px;
+}
+
+.heading-input {
+    border: 0;
+    height: 60px;
+    padding: 0 28px;
+    font-size: 18px;
+    border-radius: 999em;
+    box-shadow: 0 20px 30px 0 rgba(16, 36, 94, 0.2),
+        inset 0 -8px 0 0 rgba(103, 117, 161, 0.08);
+}
+
+.list-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.result-stats {
+    max-width: none;
+    margin: 20px 0 0;
+    font-size: 16px;
+    margin-bottom: 5px;
+    line-height: 16px;
+    text-align: right;
+}
+.multi-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .left-col {
+        width: 240px;
+        h2 {
+            margin: 40px 0 12px;
+        }
+        label {
+            font-weight: normal;
+        }
+    }
+    .right-col {
+        width: calc(100% - 260px);
+    }
+}
+
+.stat-styles {
+    max-width: none;
+	margin: 30px 0 0;
+	font-size: 16px;
+	margin-bottom: 10px;
+	line-height: 16px;
+	text-align: right;
 }
 
 .app {
@@ -409,7 +489,7 @@ const geoLayout = (reactArr) => {
 	};
 
     return `
-        <div style={{ margin: 10 }}>
+        <div style={{ margin: 10, width: '70%' }}>
             <ReactiveOpenStreetMap
                 componentId="googleMap"
                 dataField="location"
@@ -440,17 +520,17 @@ const geoLayout = (reactArr) => {
                         </div>
                     ),
                 })}
-                renderAllData={(
+                renderAllData={(                 
                     hits,
-                    loadMore,
-                    renderMap,
-                    renderPagination,
-                    triggerClickAnalytics,
-                    meta,
+					loadMore,
+					renderMap,
+					renderPagination,
+					triggerClickAnalytics,
+					meta,
                 ) => {
                     return (
-                        <div>
-                            <div >
+                        <div style={{ width: '100%', height: '100%' }}>
+                            <div className="stat-styles">
                                 {meta.resultStats.numberOfResults} results found in{' '}
                                 {meta.resultStats.time}ms
                             </div>
@@ -571,7 +651,16 @@ const ecommLayout = (reactArr) => {
 
 const generateSearchCode = (searchProps) => {
 	return reactElementToJSXString(
-		<div {...searchProps} />,
+		<div 
+            {...searchProps} 
+            style={{
+                maxWidth: '400px',
+                margin: '0 auto',
+            }}
+            innerClass={{
+                input: 'heading-input',
+            }}
+        />,
 		{
 			showFunctions: false,
 		},
@@ -638,6 +727,11 @@ const generateSandboxURL = ({ app, searchFields, facetFields }) => {
     const searchProps = {
         dataField,
         componentId: 'search',
+        showIcon: false,
+        placeholder: "Search ...",
+        autosuggest: false,
+        filterLabel: "Search",
+        highlight: true,
     }
 	const searchCode = generateSearchCode(searchProps);
 
@@ -646,7 +740,7 @@ const generateSandboxURL = ({ app, searchFields, facetFields }) => {
 	const filtersCode = generateFiltersCode(facetFields);
 
 	const unFormattedFiles = {
-		'public/index.html': { content: html },
+		'public/index.html': { content: app === 'geo-demo-app' ? geoHtml : html },
 		'src/index.js': {
 			content: index,
 		},
@@ -658,6 +752,7 @@ const generateSandboxURL = ({ app, searchFields, facetFields }) => {
 				app,
 				credentials,
 				url,
+                facetFields
 			}),
 		},
 		'src/styles.css': { content: styles(facetFields.length) },
