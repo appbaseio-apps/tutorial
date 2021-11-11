@@ -1,3 +1,6 @@
+export const url = "https://appbase-demo-ansible-abxiydt-arc.searchbase.io";
+export const credentials = "7560d5a83f05:cd92b5c0-6427-41a2-8f2e-6a7720c3a15e";
+
 export const datsetMappings = [
 	{
 		id: 'movies-demo-app',
@@ -29,3 +32,78 @@ export const datsetMappings = [
 ];
 
 export const URL = "https://b7GLrKxsd:095e2eab-3800-491b-abf6-6b15cf8edf87@appbase-demo-ansible-abxiydt-arc.searchbase.io"
+
+export const facetMappings = {
+	'release_year': 'range',
+	'genres': 'term',
+	'vote_average': 'range',
+	'categories': 'term',
+	'brand': 'term',
+	'retail_price': 'range',
+	'magnitude': 'range',
+	'year': 'range',
+	'place': 'term'
+}
+
+export const searchSettings = {
+	original_title: [
+		{
+			field: 'original_title',
+			weight: 10,
+		},
+		{
+			field: 'original_title.search',
+			weight: 2,
+		}
+	],
+	overview: [
+		{
+			field: 'overview',
+			weight: 1,
+		},
+		{
+			field: 'overview.search',
+			weight: 1,
+		}
+	],
+	place: [
+		{
+			field: 'place',
+			weight: 10,
+		},
+		{
+			field: 'place.search',
+			weight: 2,
+		}
+	],
+	product_name: [
+		{
+			field: 'product_name',
+			weight: 10,
+		},
+		{
+			field: 'product_name.search',
+			weight: 2,
+		}
+	],
+	categories: [
+		{
+			field: 'categories',
+			weight: 3,
+		},
+		{
+			field: 'categories.search',
+			weight: 1,
+		}
+	],
+	description: [
+		{
+			field: 'description',
+			weight: 1,
+		},
+		{
+			field: 'description.search',
+			weight: 1,
+		}	
+	]
+};

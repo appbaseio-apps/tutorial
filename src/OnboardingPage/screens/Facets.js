@@ -185,7 +185,7 @@ export default class Search extends Component {
 	};
 
 	render() {
-		const { nextScreen, app, previousScreen, facetFields } = this.props;
+		const { nextScreen, app, previousScreen, facetFields, searchFields } = this.props;
 		return (
 			<div>
 				<div className="wrapper">
@@ -217,6 +217,8 @@ export default class Search extends Component {
 					disabled={!facetFields.length}
 					label="Finish"
 					app={app}
+					facetFields={facetFields}
+					searchFields={searchFields}
 				/>
 			</div>
 		);

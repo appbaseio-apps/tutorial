@@ -7,7 +7,6 @@ import importSvg from '../images/Import.svg';
 
 function SampleDataset({nextScreen, selectedApp}) {
     function jsonBlock() {
-        console.log(selectedApp);
         if(selectedApp.id === 'movies-demo-app') {
             return moviesJson
         }

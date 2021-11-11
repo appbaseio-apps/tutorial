@@ -146,7 +146,6 @@ export default class Tutorial extends Component {
 
 	render() {
 		const { currentScreen, totalScreen } = this.state;
-
 		return (
 			<div className={onboardingStyles}>
 				<div className="left">

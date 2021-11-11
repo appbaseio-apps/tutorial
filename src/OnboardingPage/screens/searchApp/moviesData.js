@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import get from 'lodash/get';
 import {
 	DataSearch,
 	DynamicRangeSlider,
@@ -12,7 +10,7 @@ import {
 	SelectedFilters,
 	RangeInput,
 } from '@appbaseio/reactivesearch';
-import { Tag, Icon, notification } from 'antd';
+import { Tag, Icon } from 'antd';
 import { URL } from '../../utils/constants';
 
 const { ResultListWrapper } = ReactiveList;
@@ -237,44 +235,6 @@ class MoviesSearchApp extends Component {
 
 		this.appConfig = {};
 	}
-	
-	updateAppSettings = async (fields) => {
-		const { settings, app, updateSettingsAction } = this.props;
-		const dataField = [...fields];
-		const fieldWeights = getWeights(fields);
-		const newSettings = { ...settings };
-
-		const settingsData = {
-			...newSettings,
-			search: {
-				...newSettings?.search,
-				fieldWeights,
-				dataField,
-			},
-			aggregations: {
-				...newSettings?.aggregations,
-				dataField: {
-					'genres.keyword': 'term',
-					vote_average: 'range',
-					release_year: 'range',
-				},
-			},
-		};
-		try {
-			const savedSettings = await updateSettingsAction(app, settingsData);
-			if (savedSettings && savedSettings.error) {
-				notification.error({
-					message: 'Failed to save Search Settings',
-					description: get(savedSettings, 'error.message'),
-				});
-			}
-		} catch (err) {
-			notification.error({
-				message: 'Failed to save Search Settings',
-				description: err.message,
-			});
-		}
-	};
 
 	render() {
 		const { facets, fields: fieldsProp, ui, app } = this.props;
