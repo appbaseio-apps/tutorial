@@ -130,10 +130,9 @@ import {
 } from '@appbaseio/reactivesearch';
 import { ReactiveOpenStreetMap } from '@appbaseio/reactivemaps';
 import './styles.css';
-import { Tag, Icon } from 'antd';
+import { Tag } from 'antd';
+import { StarTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
-
-const { ResultListWrapper } = ReactiveList;
 
 const App = () => {
 	return (
@@ -423,10 +422,8 @@ const moviesLayout = (reactArr) => {
                       </p>
                       <p> {item.release_year}</p>
                       <p>
-                        <Icon
-                          type="star"
-                          style={{ marginLeft: 40, marginRight: 3 }}
-                          theme="twoTone"
+                        <StarTwoTone                         
+                          style={{ marginLeft: 40, marginRight: 3 }}                         
                         />{" "} 
                         {item.vote_average}/10
                       </p>
