@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
@@ -13,19 +14,9 @@ import reactNativeSvg from './images/finish-screen/ReactiveNative.svg';
 import mapsSvg from './images/finish-screen/ReactiveMaps.svg';
 import apiSvg from './images/finish-screen/api@3x.svg';
 
-function EndScreen() {
-	
-	function generateCodeSandbox(settings = "") {
-		// if (settings) {
-		// 	const codesandboxURL = generateSandboxURL({
-		// 		settings: "",
-		// 		app: "",
-		// 		credentials,
-		// 		url,
-		// 	});
-		// 	return codesandboxURL;
-		// }
-		return 'http://www.codesandbox.io/parameters=true';
+function EndScreen({ location }) {
+	function generateCodeSandbox() {
+		return location.state.url;
 	}
 
 	const csbURL = generateCodeSandbox();
@@ -165,4 +156,4 @@ function EndScreen() {
 	);
 }
 
-export default EndScreen;
+export default withRouter(EndScreen);

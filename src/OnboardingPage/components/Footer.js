@@ -3,14 +3,25 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import generateSandboxURL from '../../CodeSandbox/sandbox-generator';
+import { withRouter } from 'react-router-dom';
 
-const Footer = ({ previousScreen, disabled, app, label, nextScreen, searchFields, facetFields }) => {
+const Footer = ({ previousScreen, disabled, app, label, nextScreen, searchFields, facetFields, history }) => {
+	let codesandboxURL = '';
 	useEffect(() => {
-		const codesandboxURL = generateSandboxURL({
+		codesandboxURL = generateSandboxURL({
 			app, searchFields, facetFields
 		});
-		console.log(codesandboxURL);
 	}, [searchFields, facetFields])
+
+	function handleClick() {
+		history.push({
+			pathname: '/finish',
+			search: `?app=${app}`,
+			state: {
+			   url: codesandboxURL
+			}
+		})
+	}
 
 	return (
 		<footer>
@@ -28,7 +39,7 @@ const Footer = ({ previousScreen, disabled, app, label, nextScreen, searchFields
 				{label === 'Finish' ? (
 					<a
 						className={`button has-icon ${disabled ? 'disabled' : ''}`}
-						href={`/finish?app=${app}`}
+						onClick={handleClick}
 						data-cy="finish-tutorial"
 					>
 						Finish &nbsp; <Icon type="right" theme="outlined" />
@@ -68,4 +79,4 @@ Footer.defaultProps = {
 	searchFields: [],
 };
 
-export default Footer;
+export default withRouter(Footer);
