@@ -1,7 +1,7 @@
 import React from 'react';
 import { getParameters } from 'codesandbox/lib/api/define';
 import reactElementToJSXString from 'react-element-to-jsx-string';
-import { searchSettings, facetMappings, url, credentials } from '../OnboardingPage/utils/constants';
+import { searchSettings, facetMappings, URL } from '../OnboardingPage/utils/constants';
 
 const dependencies = {
 	react: '16.8.0',
@@ -138,8 +138,8 @@ const App = () => {
 	return (
 		<ReactiveBase 
             app="${app}" 
-            credentials="${credentials}" 
-            enableAppbase url="${url}"
+            url="${URL}"
+            enableAppbase 
             className="search-app"
             mapKey="AIzaSyA9JzjtHeXg_C_hh_GdTBdLxREWdj3nsOU"
             theme={{
@@ -737,7 +737,7 @@ const generateSandboxURL = ({ app, searchFields, facetFields }) => {
 	const filtersCode = generateFiltersCode(facetFields);
 
 	const unFormattedFiles = {
-		'public/index.html': { content: app === 'geo-demo-app' ? geoHtml : html },
+		'public/index.html': { content: app === 'geo1-demo-app' ? geoHtml : html },
 		'src/index.js': {
 			content: index,
 		},
@@ -747,9 +747,7 @@ const generateSandboxURL = ({ app, searchFields, facetFields }) => {
 				resultCode,
 				filtersCode,
 				app,
-				credentials,
-				url,
-                facetFields
+        facetFields
 			}),
 		},
 		'src/styles.css': { content: styles(facetFields.length) },

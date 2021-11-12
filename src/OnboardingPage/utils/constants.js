@@ -1,5 +1,4 @@
-export const url = "https://appbase-demo-ansible-abxiydt-arc.searchbase.io";
-export const credentials = "7560d5a83f05:cd92b5c0-6427-41a2-8f2e-6a7720c3a15e";
+export const URL = "https://7560d5a83f05:cd92b5c0-6427-41a2-8f2e-6a7720c3a15e@appbase-demo-ansible-abxiydt-arc.searchbase.io";
 
 export const datsetMappings = [
 	{
@@ -21,7 +20,7 @@ export const datsetMappings = [
 		count: '3,000',
 	},
 	{
-		id: 'geo-demo-app',
+		id: 'geo1-demo-app',
 		name: 'Geo Dataset',
 		description:
 			'A dataset of 3,500 earthquake samples from the last 100 years. This is ideal to experiment with the Geo use-cases.',
@@ -30,8 +29,6 @@ export const datsetMappings = [
 		count: '3,500',
 	},
 ];
-
-export const URL = "https://b7GLrKxsd:095e2eab-3800-491b-abf6-6b15cf8edf87@appbase-demo-ansible-abxiydt-arc.searchbase.io"
 
 export const facetMappings = {
 	'release_year': 'range',
