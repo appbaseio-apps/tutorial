@@ -146,6 +146,7 @@ export default class Tutorial extends Component {
 
 	render() {
 		const { currentScreen, totalScreen } = this.state;
+		const { showSkipTutorialButton } = this.props
 		return (
 			<div className={onboardingStyles}>
 				<div className="left">
@@ -205,16 +206,21 @@ export default class Tutorial extends Component {
 					</ul>
 				</div>
 				<div className="right">
-					<button
-						type="button"
-						className="skip-link"
-						onClick={this.skipTutorial}
-						data-cy="skip-tutorial"
-					>
-						&#10005; &nbsp; Skip Tutorial
-					</button>
+					{
+						showSkipTutorialButton && (
+							<button
+								type="button"
+								className="skip-link"
+								onClick={this.skipTutorial}
+								data-cy="skip-tutorial"
+							>
+								&#10005; &nbsp; Skip Tutorial
+							</button>
+						)
+					}						
 					<div className="container">{this.renderCurrentScreen()}</div>
 				</div>
+							
 			</div>
 		);
 	}
@@ -222,4 +228,9 @@ export default class Tutorial extends Component {
 
 Tutorial.propTypes = {
 	history: PropTypes.object.isRequired,
+	showSkipTutorialButton: PropTypes.bool,
+};
+
+Tutorial.defaultProps = {
+	showSkipTutorialButton: false,
 };
