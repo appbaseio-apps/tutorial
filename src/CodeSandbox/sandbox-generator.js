@@ -664,7 +664,7 @@ const generateSearchCode = (searchProps) => {
 	).replace('div', 'DataSearch');
 };
 
-const generateFiltersCode = (facetFields, app) => {
+const generateFiltersCode = (facetFields) => {
 	if (facetFields.length === 0) {
 		return '';
 	}
