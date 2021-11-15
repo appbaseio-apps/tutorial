@@ -9,7 +9,7 @@ import {
 	SelectedFilters,
 	RangeInput,
 } from '@appbaseio/reactivesearch';
-import { Tag, notification } from 'antd';
+import { Tag } from 'antd';
 import { URL } from '../../utils/constants';
 import { seachAppStyles } from './styles';
 
@@ -130,8 +130,7 @@ const renderResultList = () => (
 								alt={item.image[0]}
 								onError={(event) => {
 									// eslint-disable-next-line no-param-reassign
-									event.target.src =
-										'https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg'; // eslint-disable-line no-param-reassign
+									event.target.src =										'https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg'; // eslint-disable-line no-param-reassign
 								}}
 							/>
 						</div>
@@ -166,7 +165,7 @@ const renderResultList = () => (
 										</div>
 										<p
 											className="description-container"
-											dangerouslySetInnerHTML={{ __html: item.description }}
+											dangerouslySetInnerHTML={{ __html: item.description }} // eslint-disable-line
 										/>
 										<div>
 											{Array.isArray(item?.categories) ? (
@@ -176,7 +175,7 @@ const renderResultList = () => (
 											) : (
 												<Tag>
 													<p
-														dangerouslySetInnerHTML={{
+														dangerouslySetInnerHTML={{ // eslint-disable-line
 															__html: item.categories,
 														}}
 													/>
@@ -243,13 +242,15 @@ class EcommSearchApp extends Component {
 	}
 
 	render() {
-		const { facets, fields: fieldsProp, ui, app } = this.props;
+		const {
+ facets, fields: fieldsProp, ui, app,
+} = this.props;
 		const fields = getFields(fieldsProp, ['', '.search']);
 		const SCALR_API = URL;
 
 		return (
 			<ReactiveBase
-				{...this.appConfig}
+				{...this.appConfig} // eslint-disable-line
 				app={app}
 				url={SCALR_API}
 				enableAppbase

@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import searchSvg from '../images/Searchable.svg';
 
 export default class Search extends Component {
-	state = {
+	state = { // eslint-disable-line
 		error: '',
 		options: [
 			{
@@ -58,33 +58,32 @@ export default class Search extends Component {
 
 	renderSearchApp = () => {
 		const { searchFields, app } = this.props;
-		if(app === 'movies-demo-app') {
+		if (app === 'movies-demo-app') {
 			return (
 				<div>
 					{this.renderSearchInput(true)}
-					<MoviesSearchApp fields={searchFields} app={app}/>
+					<MoviesSearchApp fields={searchFields} app={app} />
 				</div>
-			)
-		} else if(app === 'ecomm-demo-app') {
+			);
+		} if (app === 'ecomm-demo-app') {
 			return (
 				<div>
 					{this.renderSearchInput(true)}
-					<EcommSearchApp fields={searchFields} app={app}/>
+					<EcommSearchApp fields={searchFields} app={app} />
 				</div>
-			)
-		} else {
+			);
+		}
 			return (
 				<div>
 					{this.renderSearchInput(true)}
-					<GeoSearchApp fields={searchFields} app={app}/>
+					<GeoSearchApp fields={searchFields} app={app} />
 				</div>
-			)
-		} 
+			);
 	};
 
 	handleOptions = () => {
-		const {app} = this.props;
-		if(app === 'movies-demo-app') {
+		const { app } = this.props;
+		if (app === 'movies-demo-app') {
 			this.setState({
 				options: [
 					{
@@ -95,9 +94,9 @@ export default class Search extends Component {
 						value: 'overview',
 						label: 'overview',
 					},
-				]
-			})
-		} else if(app === 'ecomm-demo-app') {
+				],
+			});
+		} else if (app === 'ecomm-demo-app') {
 			this.setState({
 				options: [
 					{
@@ -111,18 +110,18 @@ export default class Search extends Component {
 					{
 						value: 'categories',
 						label: 'categories',
-					}
-				]
-			})
+					},
+				],
+			});
 		} else {
 			this.setState({
 				options: [
 					{
 						value: 'place',
 						label: 'place',
-					}
-				]
-			})
+					},
+				],
+			});
 		}
 	}
 
@@ -215,5 +214,5 @@ Search.propTypes = {
 Search.defaultProps = {
 	nextScreen: null,
 	searchFields: [],
-	app: 'movies-demo-app'
+	app: 'movies-demo-app',
 };

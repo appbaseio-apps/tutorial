@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/no-autofocus,jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Select } from 'antd';
 import Footer from '../components/Footer';
 import { datsetMappings } from '../utils/constants';
-import createSvg from "../images/Create.svg";
+import createSvg from '../images/Create.svg';
 
 export default class Introduction extends Component {
 	constructor(props) {
@@ -17,8 +16,8 @@ export default class Introduction extends Component {
 	handleChange = (data, appName) => {
 		const { setAppName } = this.props;
 		this.setState({
-			appName: appName,
-		})
+			appName,
+		});
 		setAppName(data);
 	}
 
@@ -70,7 +69,7 @@ export default class Introduction extends Component {
 						</div>
 					</div>
 				</div>
-				<Footer nextScreen={nextScreen}/>
+				<Footer nextScreen={nextScreen} />
 			</div>
 		);
 	}

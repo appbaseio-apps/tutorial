@@ -2,12 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Introduction from './screens/Introduction';
-// import AppbaseFeatures from './screens/AppbaseFeatures';
 import Search from './screens/Search';
 import Facets from './screens/Facets';
 import SampleDataset from './screens/SampleDataset';
 import { onboardingStyles } from './styles';
-
 
 const screens = {
 	0: Introduction,
@@ -18,7 +16,7 @@ const screens = {
 };
 
 export default class Tutorial extends Component {
-	state = {
+	state = { //eslint-disable-line
 		currentScreen: 0,
 		totalScreen: 5,
 		// eslint-disable-next-line
@@ -38,10 +36,9 @@ export default class Tutorial extends Component {
 
 	nextScreen = () => {
 		this.setState((state) => {
-			const currentScreen =
-				state.currentScreen + 1 < state.totalScreen
-					? state.currentScreen + 1
-					: state.currentScreen;
+			const currentScreen = state.currentScreen + 1 < state.totalScreen
+				? state.currentScreen + 1
+				: state.currentScreen;
 
 			return {
 				...state,
@@ -53,8 +50,9 @@ export default class Tutorial extends Component {
 
 	previousScreen = () => {
 		this.setState((state) => {
-			const currentScreen =
-				state.currentScreen - 1 >= 0 ? state.currentScreen - 1 : state.currentScreen;
+			const currentScreen = state.currentScreen - 1 >= 0 
+				? state.currentScreen - 1
+				: state.currentScreen;
 
 			return {
 				...state,
@@ -74,7 +72,6 @@ export default class Tutorial extends Component {
 				currentScreen <= state.thresholdScreen ? currentScreen : state.currentScreen,
 		}));
 	};
-
 
 	setSearchFields = (searchFields) => {
 		this.setState({
@@ -101,7 +98,9 @@ export default class Tutorial extends Component {
 	};
 
 	renderCurrentScreen = () => {
-		const { currentScreen, newApp, searchFields, facetFields } = this.state;
+		const {
+ currentScreen, newApp, searchFields, facetFields,
+} = this.state;
 		const RenderScreen = screens[currentScreen];
 		let props = {};
 
@@ -139,14 +138,14 @@ export default class Tutorial extends Component {
 				nextScreen={this.nextScreen}
 				previousScreen={this.previousScreen}
 				setAppName={this.setAppName}
-				{...props}
+				{...props} //eslint-disable-line
 			/>
 		);
 	};
 
 	render() {
 		const { currentScreen, totalScreen } = this.state;
-		const { showSkipTutorialButton } = this.props
+		const { showSkipTutorialButton } = this.props;
 		return (
 			<div className={onboardingStyles}>
 				<div className="left">
@@ -166,9 +165,7 @@ export default class Tutorial extends Component {
 					</div>
 					<ul>
 						<li>
-							<a className={currentScreen === 0 ? 'active' : null}>
-								Select your app
-							</a>
+							<a className={currentScreen === 0 ? 'active' : null}>Select your app</a>
 						</li>
 						<li>
 							<a
@@ -202,25 +199,21 @@ export default class Tutorial extends Component {
 								Demo and next steps
 							</a>
 						</li>
-						
 					</ul>
 				</div>
 				<div className="right">
-					{
-						showSkipTutorialButton && (
-							<button
-								type="button"
-								className="skip-link"
-								onClick={this.skipTutorial}
-								data-cy="skip-tutorial"
-							>
-								&#10005; &nbsp; Skip Tutorial
-							</button>
-						)
-					}						
+					{showSkipTutorialButton && (
+						<button
+							type="button"
+							className="skip-link"
+							onClick={this.skipTutorial}
+							data-cy="skip-tutorial"
+						>
+							&#10005; &nbsp; Skip Tutorial
+						</button>
+					)}
 					<div className="container">{this.renderCurrentScreen()}</div>
 				</div>
-							
 			</div>
 		);
 	}

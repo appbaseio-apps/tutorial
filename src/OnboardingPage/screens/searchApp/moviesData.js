@@ -135,8 +135,7 @@ const renderResultList = () => (
 							alt={item.poster_path}
 							onError={(event) => {
 								// eslint-disable-next-line no-param-reassign
-								event.target.src =
-									'https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg'; // eslint-disable-line no-param-reassign
+								event.target.src =									'https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg'; // eslint-disable-line no-param-reassign
 							}}
 						/>
 						<ResultList key={item._id} id={item._id}>
@@ -159,7 +158,8 @@ const renderResultList = () => (
 													style={{ marginLeft: 40, marginRight: 3 }}
 													theme="twoTone"
 												/>{' '}
-												{item.vote_average}/10
+												{item.vote_average}
+												/10
 											</p>
 										</div>
 										<p
@@ -169,12 +169,17 @@ const renderResultList = () => (
 												fontSize: '13px',
 												lineHeight: '18px',
 											}}
-											dangerouslySetInnerHTML={{ __html: item.overview }}
+											dangerouslySetInnerHTML={{ __html: item.overview }} // eslint-disable-line
 										/>
 										<div>
-											{item.genres.map((genre, index) => (
-												<Tag key={`${genre}-${index}`}>{genre}</Tag>
-											))}
+											{item.genres.map(
+												(
+													genre,
+													index,
+												) => ( // eslint-disable-next-line
+													<Tag key={`${genre}-${index}`}>{genre}</Tag>
+												),
+											)}
 										</div>
 									</div>
 								</ResultList.Description>
@@ -237,12 +242,14 @@ class MoviesSearchApp extends Component {
 	}
 
 	render() {
-		const { facets, fields: fieldsProp, ui, app } = this.props;
+		const {
+ facets, fields: fieldsProp, ui, app,
+} = this.props;
 		const fields = getFields(fieldsProp, ['', '.search']);
 		const SCALR_API = URL;
 		return (
 			<ReactiveBase
-				{...this.appConfig}
+				{...this.appConfig} // eslint-disable-line
 				app={app}
 				url={SCALR_API}
 				enableAppbase

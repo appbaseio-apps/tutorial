@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { css } from '@emotion/css';
-import get from 'lodash/get';
 import {
 	RangeSlider,
 	MultiList,
@@ -13,7 +11,6 @@ import {
 	RangeInput,
 } from '@appbaseio/reactivesearch';
 import { ReactiveOpenStreetMap } from '@appbaseio/reactivemaps';
-import { notification } from 'antd';
 import { URL } from '../../utils/constants';
 
 const statStyles = css`
@@ -141,7 +138,7 @@ const renderResultList = () => {
 		<div style={{ margin: 10 }}>
 			<ReactiveOpenStreetMap
 				componentId="googleMap"
-				{...mapProps}
+				{...mapProps} // eslint-disable-line
 				renderAllData={(
 					hits,
 					loadMore,
@@ -149,17 +146,15 @@ const renderResultList = () => {
 					renderPagination,
 					triggerClickAnalytics,
 					meta,
-				) => {
-					return (
-						<>
-							<div css={statStyles}>
-								{meta?.resultStats?.numberOfResults} results found in{' '}
-								{meta?.resultStats?.time}ms
-							</div>
-							{renderMap()}
-						</>
-					);
-				}}
+				) => (
+					<>
+						<div css={statStyles}>
+							{meta?.resultStats?.numberOfResults} results found in{' '}
+							{meta?.resultStats?.time}ms
+						</div>
+						{renderMap()}
+					</>
+				)}
 			/>
 		</div>
 	);
@@ -213,52 +208,16 @@ class GeoSearchApp extends Component {
 		this.appConfig = {};
 	}
 
-	updateAppSettings = async (fields) => {
-		const { settings, app, updateSettingsAction } = this.props;
-		const dataField = [...fields];
-		const fieldWeights = getWeights(fields);
-		const newSettings = { ...settings };
-
-		const settingsData = {
-			...newSettings,
-			search: {
-				...newSettings?.search,
-				fieldWeights,
-				dataField,
-			},
-			aggregations: {
-				...newSettings?.aggregations,
-				dataField: {
-					'place.keyword': 'term',
-					magnitude: 'range',
-					year: 'range',
-				},
-			},
-		};
-		try {
-			const savedSettings = await updateSettingsAction(app, settingsData);
-			if (savedSettings && savedSettings.error) {
-				notification.error({
-					message: 'Failed to save Search Settings',
-					description: get(savedSettings, 'error.message'),
-				});
-			}
-		} catch (err) {
-			notification.error({
-				message: 'Failed to save Search Settings',
-				description: err.message,
-			});
-		}
-	};
-
 	render() {
-		const { facets, fields: fieldsProp, ui, app } = this.props;
+		const {
+ facets, fields: fieldsProp, ui, app,
+} = this.props;
 		const fields = getFields(fieldsProp, ['', '.search']);
 		const SCALR_API = URL;
 
 		return (
 			<ReactiveBase
-				{...this.appConfig}
+				{...this.appConfig} // eslint-disable-line
 				app={app}
 				url={SCALR_API}
 				enableAppbase

@@ -1,13 +1,9 @@
-import logo from './logo.svg';
-// import Onboarding from './OnboardingPage';
-
-function App() {
+const App = function () {
   return (
-    <div>
-      {/* <Onboarding /> */}
+    <div> {/* eslint-disable-line */}
       hello
     </div>
   );
-}
+};
 
 export default App;

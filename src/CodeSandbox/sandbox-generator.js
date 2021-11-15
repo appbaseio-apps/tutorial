@@ -7,11 +7,10 @@ const dependencies = {
 	react: '16.8.0',
 	'react-dom': '16.8.0',
 	'@appbaseio/reactivesearch': 'latest',
-    '@appbaseio/reactivemaps': 'latest',
-    'antd': '3.18.2',
-    '@ant-design/icons': 'latest',
-    '@ant-design/icons-svg': 'latest',
-    'antd': 'latest',
+	'@appbaseio/reactivemaps': 'latest',
+	antd: '3.18.2',
+	'@ant-design/icons': 'latest',
+	'@ant-design/icons-svg': 'latest',
 };
 
 const html = `<!DOCTYPE html>
@@ -85,38 +84,37 @@ ReactDOM.render(<App />, rootElement);
 `;
 
 const renderHeading = (app) => {
-    if(app === 'movies-demo-app') {
-        return `
+	if (app === 'movies-demo-app') {
+		return `
         <h2 className="header-heading">
             The Movies Store{' '}
             <span role="img" aria-label="books">
                 🎥
             </span>
         </h2>
-        `
-    } else if(app === 'ecomm-demo-app') {
-        return `
+        `;
+	}
+	if (app === 'ecomm-demo-app') {
+		return `
         <h2 className="header-heading">
             The Products Store{' '}
             <span role="img" aria-label="books">
                 💻
             </span>
         </h2>
-    `
-    } else {
-        return `
+    `;
+	}
+	return `
         <h2 className="header-heading">
             The Geo Data{' '}
             <span role="img" aria-label="books">
                 🌎
             </span>
         </h2>
-        `
-    }
-}
-
-const generateAppCode = ({ searchCode, filtersCode, resultCode, app, facetFields }) => {
-	return `
+        `;
+};
+// eslint-disable-next-line
+const generateAppCode = ({ searchCode, filtersCode, resultCode, app }) => `
 import React from 'react';
 import {
     DataSearch,
@@ -169,7 +167,6 @@ const App = () => {
 
 export default App;
 	`;
-};
 
 const styles = (hasFilters) => `body {
   margin: 0;
@@ -355,26 +352,23 @@ pre {
 
 const sentenceCase = (text) => {
 	if (text) {
-		return text.replace(/(?:_| |\b)(\w)/g, function ($1) {
-			return $1.toUpperCase().replace('_', ' ');
-		});
+		return text.replace(/(?:_| |\b)(\w)/g, ($1) => $1.toUpperCase().replace('_', ' '));
 	}
 	return text;
 };
 
 const generateResultCode = (facetFields, app) => {
-    const reactArr = JSON.stringify(['search', ...facetFields]);
-    if(app === 'movies-demo-app') {
-        return moviesLayout(reactArr);
-    } else if(app === 'ecomm-demo-app') {
-        return ecommLayout(reactArr);
-    } else {
-        return geoLayout(reactArr);
-    }
-}
+	const reactArr = JSON.stringify(['search', ...facetFields]);
+	if (app === 'movies-demo-app') {
+		return moviesLayout(reactArr);
+	}
+	if (app === 'ecomm-demo-app') {
+		return ecommLayout(reactArr);
+	}
+	return geoLayout(reactArr);
+};
 
-const moviesLayout = (reactArr) => {
-    return `
+const moviesLayout = (reactArr) => `
     <ReactiveList
     componentId="results"
     dataField="_score"
@@ -453,39 +447,10 @@ const moviesLayout = (reactArr) => {
       </ReactiveList.ResultListWrapper>
     )}
   />
-    `
-}
+    `;
 
-const geoLayout = (reactArr) => {   
-    const mapProps = {
-		dataField: 'location',
-		defaultMapStyle: 'Light Monochrome',
-		title: 'Reactive Maps',
-		defaultZoom: 6,
-		size: 10,
-		style: { zIndex: 0 },
-		onPopoverClick: (item) => <div>{item.place}</div>,
-		showMapStyles: true,
-		renderData: (result) => ({
-			custom: (
-				<div
-					style={{
-						background: 'dodgerblue',
-						color: '#fff',
-						paddingLeft: 5,
-						paddingRight: 5,
-						borderRadius: 3,
-						padding: 10,
-					}}
-				>
-					<i className="fas fa-globe-europe" />
-					&nbsp;{result.magnitude}
-				</div>
-			),
-		}),
-	};
-
-    return `
+const geoLayout = (reactArr) => { //eslint-disable-line
+	return `
         <div style={{ margin: 10, width: '70%' }}>
             <ReactiveOpenStreetMap
                 componentId="googleMap"
@@ -537,11 +502,10 @@ const geoLayout = (reactArr) => {
                 }}
             />
         </div>
-    `
-}
+    `;
+};
 
-const ecommLayout = (reactArr) => {  
-    return `
+const ecommLayout = (reactArr) => `
     <ReactiveList
     componentId="results"
     dataField="_score"
@@ -643,21 +607,20 @@ const ecommLayout = (reactArr) => {
       </ReactiveList.ResultListWrapper>
     )}
   />
-    `
-}
+    `;
 
-const generateSearchCode = (searchProps) => {
+const generateSearchCode = (searchProps) => { //eslint-disable-line
 	return reactElementToJSXString(
-		<div 
-            {...searchProps} 
-            style={{
-                maxWidth: '400px',
-                margin: '0 auto',
-            }}
-            innerClass={{
-                input: 'heading-input',
-            }}
-        />,
+		<div
+			{...searchProps} //eslint-disable-line
+			style={{
+				maxWidth: '400px',
+				margin: '0 auto',
+			}}
+			innerClass={{
+				input: 'heading-input',
+			}}
+		/>,
 		{
 			showFunctions: false,
 		},
@@ -680,94 +643,92 @@ const generateFiltersCode = (facetFields) => {
 		if (facetMappings[field] === 'term') {
 			listCode = reactElementToJSXString(
 				<div
-          componentId={field}
+					componentId={field}
 					dataField={`${field}.keyword`}
 					className="filter"
 					title={sentenceCase(field)}
 					filterLabel={sentenceCase(field)}
 					size={10}
-                    sortBy="count"
+					sortBy="count"
 					react={{ and: listArr.filter((i) => i !== field) }}
 				/>,
 				{
 					showFunctions: false,
 				},
 			).replace('div', 'MultiList');
+		} else if (field === 'retail_price') {
+			listCode = reactElementToJSXString(
+				<div
+					componentId={field}
+					dataField={field}
+					key={field}
+					title="Retail Price (Rupees)"
+					filterLabel="Retail Price"
+					showHistogram
+					range={{
+						start: 10,
+						end: 10000,
+					}}
+				/>,
+			).replace('div', 'RangeInput');
+		} else if (field === 'magnitude') {
+			listCode = reactElementToJSXString(
+				<div
+					componentId={field}
+					dataField={field}
+					key={field}
+					title="Magnitude (Richter)"
+					filterLabel="Magnitude"
+					showHistogram
+					rangeLabels={{
+						start: '0.0',
+						end: '10.0',
+					}}
+				/>,
+			).replace('div', 'RangeSlider');
+		} else if (field === 'year') {
+			listCode = reactElementToJSXString(
+				<div
+					componentId={field}
+					dataField={field}
+					key={field}
+					title="Year"
+					filterLabel="Year"
+					showHistogram
+					range={{
+						start: 1970,
+						end: 2017,
+					}}
+				/>,
+			).replace('div', 'RangeInput');
+		} else if (field === 'release_year') {
+			listCode = reactElementToJSXString(
+				<div
+					componentId={field}
+					dataField={field}
+					key={field}
+					title="Release Year"
+					filterLabel="Release Year"
+					showHistogram
+					range={{
+						start: 1950,
+						end: 2021,
+					}}
+				/>,
+			).replace('div', 'RangeInput');
 		} else {
-      if(field === 'retail_price') {
-        listCode = reactElementToJSXString(
-          <div
-            componentId={field}
-            dataField={field}
-            key={field}
-            title="Retail Price (Rupees)"
-            filterLabel="Retail Price"
-            showHistogram
-            range={{
-              start: 10,
-              end: 10000,
-            }}
-          />
-        ).replace('div', 'RangeInput');     
-      } else if(field === 'magnitude') {
-        listCode = reactElementToJSXString(
-          <div
-            componentId={field}
-            dataField={field}
-            key={field}
-            title="Magnitude (Richter)"
-            filterLabel="Magnitude"
-            showHistogram
-            rangeLabels={{
-              start: '0.0',
-              end: '10.0',
-            }}
-          />
-        ).replace('div', 'RangeSlider');    
-      } else if(field === 'year') {
-        listCode = reactElementToJSXString(
-          <div
-            componentId={field}
-            dataField={field}
-            key={field}
-            title="Year"
-            filterLabel="Year"
-            showHistogram
-            range={{
-              start: 1970,
-              end: 2017,
-            }}
-          />
-        ).replace('div', 'RangeInput');    
-      } else if(field === 'release_year') {
-        listCode = reactElementToJSXString(
-          <div
-            componentId={field}
-            dataField={field}
-            key={field}
-            title="Release Year"
-            filterLabel="Release Year"
-            showHistogram
-            range={{
-              start: 1950,
-              end: 2021,
-            }}
-          />
-        ).replace('div', 'RangeInput');     
-      } else {
-        listCode = reactElementToJSXString(
-          <div
-            dataField={field}
-            className="filter"
-            title={sentenceCase(field)}
-            componentId={field}
-            filterLabel={sentenceCase(field)}
-          />,
-          {
-            showFunctions: false,
-          },
-        ).replace('div', 'DynamicRangeSlider');
-      }
+			listCode = reactElementToJSXString(
+				<div
+					dataField={field}
+					className="filter"
+					title={sentenceCase(field)}
+					componentId={field}
+					filterLabel={sentenceCase(field)}
+				/>,
+				{
+					showFunctions: false,
+				},
+			).replace('div', 'DynamicRangeSlider');
 		}
 
 		if (agg) {
@@ -778,20 +739,19 @@ const generateFiltersCode = (facetFields) => {
 };
 
 const generateSandboxURL = ({ app, searchFields, facetFields }) => {
-	
-    let dataField = [];
-    searchFields.forEach(field => {
-        dataField = [...dataField, ...searchSettings[field]];
-    });
-    const searchProps = {
-        dataField,
-        componentId: 'search',
-        showIcon: false,
-        placeholder: "Search ...",
-        autosuggest: false,
-        filterLabel: "Search",
-        highlight: true,
-    }
+	let dataField = [];
+	searchFields.forEach((field) => {
+		dataField = [...dataField, ...searchSettings[field]];
+	});
+	const searchProps = {
+		dataField,
+		componentId: 'search',
+		showIcon: false,
+		placeholder: 'Search ...',
+		autosuggest: false,
+		filterLabel: 'Search',
+		highlight: true,
+	};
 	const searchCode = generateSearchCode(searchProps);
 
 	const resultCode = generateResultCode(facetFields, app);
@@ -809,7 +769,7 @@ const generateSandboxURL = ({ app, searchFields, facetFields }) => {
 				resultCode,
 				filtersCode,
 				app,
-        facetFields
+				facetFields,
 			}),
 		},
 		'src/styles.css': { content: styles(facetFields.length) },

@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import aggSvg from '../images/Aggregation.svg';
 
 export default class Search extends Component {
-	state = {
+	state = { // eslint-disable-line
 		error: '',
 		options: [
 			{
@@ -67,34 +67,32 @@ export default class Search extends Component {
 	renderSearchApp = () => {
 		const { searchFields, facetFields, app } = this.props;
 
-		if(app === 'movies-demo-app') {
+		if (app === 'movies-demo-app') {
 			return (
 				<div>
 					{this.renderFacetInput(true)}
-					<MoviesSearchApp fields={searchFields} facets={facetFields} app={app}/>
+					<MoviesSearchApp fields={searchFields} facets={facetFields} app={app} />
 				</div>
-			)
-		} else if(app === 'ecomm-demo-app') {
+			);
+		} if (app === 'ecomm-demo-app') {
 			return (
 				<div>
 					{this.renderFacetInput(true)}
-					<EcommSearchApp fields={searchFields} facets={facetFields} app={app}/>
+					<EcommSearchApp fields={searchFields} facets={facetFields} app={app} />
 				</div>
-			)
-		} else {
+			);
+		}
 			return (
 				<div>
 					{this.renderFacetInput(true)}
-					<GeoSearchApp fields={searchFields} facets={facetFields} app={app}/>
+					<GeoSearchApp fields={searchFields} facets={facetFields} app={app} />
 				</div>
-			)
-		} 
-
+			);
 	};
 
 	handleOptions = () => {
-		const {app} = this.props;
-		if(app === 'movies-demo-app') {
+		const { app } = this.props;
+		if (app === 'movies-demo-app') {
 			this.setState({
 				options: [
 					{
@@ -109,9 +107,9 @@ export default class Search extends Component {
 						value: 'vote_average',
 						label: 'vote_average',
 					},
-				]
-			})
-		} else if(app === 'ecomm-demo-app') {
+				],
+			});
+		} else if (app === 'ecomm-demo-app') {
 			this.setState({
 				options: [
 					{
@@ -126,8 +124,8 @@ export default class Search extends Component {
 						value: 'retail_price',
 						label: 'retail_price',
 					},
-				]
-			})
+				],
+			});
 		} else {
 			this.setState({
 				options: [
@@ -143,10 +141,11 @@ export default class Search extends Component {
 						value: 'place',
 						label: 'place',
 					},
-				]
-			})
+				],
+			});
 		}
 	}
+
 	renderFacetInput = (horizontal) => {
 		const { error, selectedOption, options } = this.state;
 		return (
@@ -185,7 +184,9 @@ export default class Search extends Component {
 	};
 
 	render() {
-		const { nextScreen, app, previousScreen, facetFields, searchFields } = this.props;
+		const {
+ nextScreen, app, previousScreen, facetFields, searchFields,
+} = this.props;
 		return (
 			<div>
 				<div className="wrapper">
@@ -231,7 +232,6 @@ Search.propTypes = {
 	facetFields: PropTypes.array,
 	searchFields: PropTypes.array,
 	setFacetFields: PropTypes.func.isRequired,
-	selectedDataset: PropTypes.string,
 	app: PropTypes.string.isRequired,
 };
 
@@ -240,5 +240,4 @@ Search.defaultProps = {
 	previousScreen: null,
 	facetFields: [],
 	searchFields: [],
-	selectedDataset: 'movies'
 };

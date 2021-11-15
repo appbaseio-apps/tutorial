@@ -1,20 +1,20 @@
 /* eslint-disable react/jsx-curly-brace-presence */
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import trophyPng from './images/finish-screen/Trophy.png';
 import trophyPng2 from './images/finish-screen/Trophy@2x.png';
 import webAppPng from './images/finish-screen/Webapp.png';
-import webApp2 from './images/finish-screen/Webapp@2x.png'
-import groupPng from './images/finish-screen/Group@3x.svg';
+import webApp2 from './images/finish-screen/Webapp@2x.png';
 import reactNativeSvg from './images/finish-screen/ReactiveNative.svg';
 import mapsSvg from './images/finish-screen/ReactiveMaps.svg';
 import apiSvg from './images/finish-screen/api@3x.svg';
 
-function EndScreen({ location }) {
+const EndScreen = function ({ location }) { //eslint-disable-line
 	function generateCodeSandbox() {
 		return location.state.url;
 	}
@@ -27,7 +27,7 @@ function EndScreen({ location }) {
 				<div className="container">
 					<div className="banner-row">
 						<div className="big-card">
-							<h2>Share what you've built</h2>
+							<h2>Share what you've built</h2> {/* eslint-disable-line */}
 
 							<div>
 								<div className="col">
@@ -54,16 +54,26 @@ function EndScreen({ location }) {
 									/>
 									<h3>Open the app you just built in codesandbox.io</h3>
 									<div>
-									{/* {csbURL && ( */}
-										<div className="header-card">	
-											<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+										{/* {csbURL && ( */}
+										<div className="header-card">
+											<div
+												style={{
+													display: 'flex',
+													alignItems: 'center',
+													gap: 10,
+												}}
+											>
 												<div className="overflow-text">{csbURL}</div>
 												<CopyToClipboard text={csbURL}>
-													<Icon type="copy" theme="outlined" className="icon-active" />
+													<Icon
+														type="copy"
+														theme="outlined"
+														className="icon-active"
+													/>
 												</CopyToClipboard>
 											</div>
 										</div>
-									{/* )} */}
+										{/* )} */}
 									</div>
 								</div>
 							</div>
@@ -81,9 +91,7 @@ function EndScreen({ location }) {
 								alt="Webapp"
 							/>
 							<h3>Learn how to build a web app</h3>
-							<p>
-								appbase.io UI components for building data-driven web apps.
-							</p>
+							<p>appbase.io UI components for building data-driven web apps.</p>
 							<a
 								target="_blank"
 								rel="noreferrer"
@@ -91,17 +99,14 @@ function EndScreen({ location }) {
 								href="https://docs.appbase.io/docs/reactivesearch/v3/overview/quickstart/"
 							>
 								Get Started
-							</a>	
+							</a>
 						</div>
 					</div>
 
 					<div className="card-row">
 						<div className="card">
 							<h2>MOBILE APP</h2>
-							<img
-								src={reactNativeSvg}
-								alt="Reactive search"
-							/>
+							<img src={reactNativeSvg} alt="Reactive search" />
 							<p>appbase.io UI components for building mobile apps.</p>
 							<a
 								className="button"
@@ -114,10 +119,7 @@ function EndScreen({ location }) {
 						</div>
 						<div className="card">
 							<h2>MAPS APP</h2>
-							<img
-								src={mapsSvg}
-								alt="Reactive maps"
-							/>
+							<img src={mapsSvg} alt="Reactive maps" />
 							<p>appbase.io UI components for building realtime geolocation apps.</p>
 							<a
 								className="button"
@@ -154,6 +156,10 @@ function EndScreen({ location }) {
 			</div>
 		</Layout>
 	);
-}
+};
+
+EndScreen.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 
 export default withRouter(EndScreen);

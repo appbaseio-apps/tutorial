@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const ecommJson = `
 <div style="background: #DCF8FF; overflow:auto;width:auto;padding:1rem;">
 <pre style="margin: 0; line-height: 180%; border: 0; background: transparent; border-radius: 0;">

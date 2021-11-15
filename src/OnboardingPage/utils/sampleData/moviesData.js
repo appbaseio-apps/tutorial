@@ -10,7 +10,10 @@ export const moviesJson = `
         "id": 399566,
         "original_language": "en",
         "original_title": "Godzilla vs. Kong",
-        "overview": "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
+        "overview": "In a time when monsters walk the Earth, humanity’s fight for its future sets 
+        Godzilla and Kong on a collision course that will see the two most powerful forces of nature
+        on the planet collide in a spectacular 
+        battle for the ages.",
         "popularity": 456.906,
         "poster_path": "https://www.themoviedb.org/t/p/w1280/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
         "release_date": "2021-03-24",
@@ -27,7 +30,9 @@ export const moviesJson = `
         "id": 841755,
         "original_language": "en",
         "original_title": "Mortal Kombat Legends: Battle of the Realms",
-        "overview": "The Earthrealm heroes must journey to the Outworld and fight for the survival of their homeland, invaded by the forces of evil warlord Shao Kahn, in the tournament to end all tournaments: the final Mortal Kombat.",
+        "overview": "The Earthrealm heroes must journey to the Outworld and fight for the survival 
+        of their homeland, invaded by forces of evil warlord Shao Kahn, in the tournament to end 
+        all tournaments: the final Mortal Kombat.",
         "popularity": 395.824,
         "poster_path": "https://www.themoviedb.org/t/p/w1280/ablrE8IbWcIrAxMmm4gnPn75AMS.jpg",
         "release_date": "2021-08-30",
