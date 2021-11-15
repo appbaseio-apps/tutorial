@@ -33,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx pages",
-    "lint:fix": "eslint --ext .js,.jsx pages --fix",
+    "lint:fix": "eslint --ext .js,.jsx pages --fix"
   },
   "husky": {
     "hooks": {
@@ -41,7 +41,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "./src/*.js": [
       "prettier --write --use-tabs",
       "eslint --fix"
     ]

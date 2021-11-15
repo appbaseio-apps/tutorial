@@ -11,7 +11,7 @@ import {
 } from '@appbaseio/reactivesearch';
 import { Tag, notification } from 'antd';
 import { URL } from '../../utils/constants';
-	import { seachAppStyles } from './styles';
+import { seachAppStyles } from './styles';
 
 const { ResultListWrapper } = ReactiveList;
 

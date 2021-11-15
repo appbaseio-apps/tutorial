@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import Tutorial from './OnboardingPage';
-import EndScreen from './OnboardingPage/EndScreen';
+  import EndScreen from './OnboardingPage/EndScreen';
 import {
   BrowserRouter as Router,
   Switch,
