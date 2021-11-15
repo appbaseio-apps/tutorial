@@ -15,6 +15,8 @@
     "codesandbox": "^2.2.3",
     "emotion": "^11.0.0",
     "eslint": "^8.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.0.2",
     "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
@@ -29,7 +31,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx pages",
+    "lint:fix": "eslint --ext .js,.jsx pages --fix",
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --use-tabs",
+      "eslint --fix"
+    ]
   },
   "eslintConfig": {
     "extends": [
