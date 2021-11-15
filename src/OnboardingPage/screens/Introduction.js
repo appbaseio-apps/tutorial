@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { Select } from 'antd';
 import Footer from '../components/Footer';
 import { datsetMappings } from '../utils/constants';
-import createSvg from "../images/Create.svg"
-
-const { Option } = Select;
+import createSvg from "../images/Create.svg";
 
 export default class Introduction extends Component {
 	constructor(props) {
