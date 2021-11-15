@@ -664,7 +664,7 @@ const generateSearchCode = (searchProps) => {
 	).replace('div', 'DataSearch');
 };
 
-const generateFiltersCode = (facetFields) => {
+const generateFiltersCode = (facetFields, app) => {
 	if (facetFields.length === 0) {
 		return '';
 	}
@@ -680,7 +680,7 @@ const generateFiltersCode = (facetFields) => {
 		if (facetMappings[field] === 'term') {
 			listCode = reactElementToJSXString(
 				<div
-                    componentId={field}
+          componentId={field}
 					dataField={`${field}.keyword`}
 					className="filter"
 					title={sentenceCase(field)}
@@ -694,18 +694,80 @@ const generateFiltersCode = (facetFields) => {
 				},
 			).replace('div', 'MultiList');
 		} else {
-			listCode = reactElementToJSXString(
-				<div
-					dataField={field}
-					className="filter"
-					title={sentenceCase(field)}
-					componentId={field}
-					filterLabel={sentenceCase(field)}
-				/>,
-				{
-					showFunctions: false,
-				},
-			).replace('div', 'DynamicRangeSlider');
+      if(field === 'retail_price') {
+        listCode = reactElementToJSXString(
+          <div
+            componentId={field}
+            dataField={field}
+            key={field}
+            title="Retail Price (Rupees)"
+            filterLabel="Retail Price"
+            showHistogram
+            range={{
+              start: 10,
+              end: 10000,
+            }}
+          />
+        ).replace('div', 'RangeInput');     
+      } else if(field === 'magnitude') {
+        listCode = reactElementToJSXString(
+          <div
+            componentId={field}
+            dataField={field}
+            key={field}
+            title="Magnitude (Richter)"
+            filterLabel="Magnitude"
+            showHistogram
+            rangeLabels={{
+              start: '0.0',
+              end: '10.0',
+            }}
+          />
+        ).replace('div', 'RangeSlider');    
+      } else if(field === 'year') {
+        listCode = reactElementToJSXString(
+          <div
+            componentId={field}
+            dataField={field}
+            key={field}
+            title="Year"
+            filterLabel="Year"
+            showHistogram
+            range={{
+              start: 1970,
+              end: 2017,
+            }}
+          />
+        ).replace('div', 'RangeInput');    
+      } else if(field === 'release_year') {
+        listCode = reactElementToJSXString(
+          <div
+            componentId={field}
+            dataField={field}
+            key={field}
+            title="Release Year"
+            filterLabel="Release Year"
+            showHistogram
+            range={{
+              start: 1950,
+              end: 2021,
+            }}
+          />
+        ).replace('div', 'RangeInput');     
+      } else {
+        listCode = reactElementToJSXString(
+          <div
+            dataField={field}
+            className="filter"
+            title={sentenceCase(field)}
+            componentId={field}
+            filterLabel={sentenceCase(field)}
+          />,
+          {
+            showFunctions: false,
+          },
+        ).replace('div', 'DynamicRangeSlider');
+      }
 		}
 
 		if (agg) {
