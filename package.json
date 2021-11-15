@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx pages",
+    "lint": "eslint src/ --ext .js,.jsx",
     "lint:fix": "eslint --ext .js,.jsx pages --fix"
   },
   "husky": {
@@ -41,7 +41,7 @@
     }
   },
   "lint-staged": {
-    "./src/*.js": [
+    "./src/**/*.js": [
       "prettier --write --use-tabs",
       "eslint --fix"
     ]
