@@ -10,6 +10,7 @@ import {
 	RangeInput,
 } from '@appbaseio/reactivesearch';
 import { Tag } from 'antd';
+import 'antd/dist/antd.css';
 import { URL } from '../../utils/constants';
 import { seachAppStyles } from './styles';
 

@@ -12,6 +12,7 @@ import {
 } from '@appbaseio/reactivesearch';
 import { Tag } from 'antd';
 import { StarTwoTone } from '@ant-design/icons';
+import 'antd/dist/antd.css';
 import { URL } from '../../utils/constants';
 
 const { ResultListWrapper } = ReactiveList;
