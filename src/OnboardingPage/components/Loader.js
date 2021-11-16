@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Loader = function ({ show, label }) {
+const Loader = function ({ show, label }) { {/* eslint-disable-line */}
   if (!show) return null;
 
   return (
