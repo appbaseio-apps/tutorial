@@ -8,7 +8,7 @@ const dependencies = {
 	'react-dom': '16.8.0',
 	'@appbaseio/reactivesearch': 'latest',
 	'@appbaseio/reactivemaps': 'latest',
-	antd: '3.18.2',
+	antd: '4.17.0',
 	'@ant-design/icons': 'latest',
 	'@ant-design/icons-svg': 'latest',
 };

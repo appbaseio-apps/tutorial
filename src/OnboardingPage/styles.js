@@ -484,7 +484,7 @@ const endScreenStyles = css`
 		padding: 1%;
 		margin: 10px 0px;
 		.overflow-text {
-			width: 300px;
+			width: 800px;
 			height: 20px;
 			white-space: nowrap;
 			overflow: hidden;

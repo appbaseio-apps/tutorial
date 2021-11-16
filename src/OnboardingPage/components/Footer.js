@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
 import generateSandboxURL from '../../CodeSandbox/sandbox-generator';
 
@@ -35,7 +35,7 @@ const Footer = function ({ // eslint-disable-line
             onClick={previousScreen}
             data-cy="goto-previous-step"
           >
-            <Icon type="left" theme="outlined" />
+            <LeftOutlined />
             {' '}
 &nbsp; Previous
           </a>
@@ -48,7 +48,7 @@ const Footer = function ({ // eslint-disable-line
           >
             Finish &nbsp;
             {' '}
-            <Icon type="right" theme="outlined" />
+            <RightOutlined />
           </a>
         ) : (
           <a
@@ -60,7 +60,7 @@ const Footer = function ({ // eslint-disable-line
           >
             {label || 'Next'}
             {' '}
-            <Icon type="right" theme="outlined" />
+            <RightOutlined />
           </a>
         )}
       </div>

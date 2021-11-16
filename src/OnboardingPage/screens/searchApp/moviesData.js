@@ -10,7 +10,8 @@ import {
 	SelectedFilters,
 	RangeInput,
 } from '@appbaseio/reactivesearch';
-import { Tag, Icon } from 'antd';
+import { Tag } from 'antd';
+import { StarTwoTone } from '@ant-design/icons';
 import { URL } from '../../utils/constants';
 
 const { ResultListWrapper } = ReactiveList;
@@ -135,7 +136,7 @@ const renderResultList = () => (
 							alt={item.poster_path}
 							onError={(event) => {
 								// eslint-disable-next-line no-param-reassign
-								event.target.src =									'https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg'; // eslint-disable-line no-param-reassign
+								event.target.src = 'https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg'; // eslint-disable-line no-param-reassign
 							}}
 						/>
 						<ResultList key={item._id} id={item._id}>
@@ -153,11 +154,7 @@ const renderResultList = () => (
 											</p>
 											<p> {item.release_year}</p>
 											<p>
-												<Icon
-													type="star"
-													style={{ marginLeft: 40, marginRight: 3 }}
-													theme="twoTone"
-												/>{' '}
+												<StarTwoTone /> {' '}
 												{item.vote_average}
 												/10
 											</p>

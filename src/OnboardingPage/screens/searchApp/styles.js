@@ -24,4 +24,27 @@ const seachAppStyles = css`
     }
 `;
 
-export { seachAppStyles };
+const tagContainer = css`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 10px;
+	.tag {
+		justify-content: end;
+		margin-right: 10px;
+		& * {
+			margin: 0 !important;
+			padding: 0 !important;
+			max-width: 200px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			list-style: none !important;
+			display: inline !important;
+			line-height: inherit !important;
+			font-size: 14px !important;
+		}
+	}
+`;
+
+export { seachAppStyles, tagContainer };

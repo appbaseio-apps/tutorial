@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
+import { CopyOutlined } from '@ant-design/icons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
@@ -29,29 +30,19 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 						<div className="big-card">
 							<h2>Share what you've built</h2> {/* eslint-disable-line */}
 
-							<div>
-								<div className="col">
+							<div style={{ width: '100%', marginTop: 15 }}>								
+								<div>									
 									<img
 										src={trophyPng}
 										srcSet={`${trophyPng} 245w, ${trophyPng2} 490w`}
 										alt="Trophy"
+										style={{ margin: 10 }}
 									/>
 									<p>
 										You
 										{"'"}
 										ve finished the tutorial.
 									</p>
-								</div>
-
-								<div className="col">
-									<img
-										style={{
-											width: '150px',
-										}}
-										src={webAppPng}
-										srcSet={`${webAppPng} 245w, ${webApp2} 490w`}
-										alt="Webapp"
-									/>
 									<h3>Open the app you just built in codesandbox.io</h3>
 									<div>
 										{/* {csbURL && ( */}
@@ -65,12 +56,30 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 											>
 												<div className="overflow-text">{csbURL}</div>
 												<CopyToClipboard text={csbURL}>
-													<Icon
+													<CopyOutlined className="icon-active" />
+													{/* <Icon
 														type="copy"
 														theme="outlined"
 														className="icon-active"
-													/>
+													/> */}
 												</CopyToClipboard>
+												<a
+													target="_blank"
+													rel="noreferrer"
+													href={csbURL}
+													style={{ height: 20 }}
+												>
+													<img 
+														src="https://imgur.com/ZBcgHr3.png"
+														alt="share-icon"
+														style={{
+															height: 16,
+															width: 16,
+															marginBottom: 0,
+														}}													
+													/>
+												</a>
+												
 											</div>
 										</div>
 										{/* )} */}
