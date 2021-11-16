@@ -485,7 +485,7 @@ const endScreenStyles = css`
 		margin: 10px 0px;
 		.overflow-text {
 			width: 800px;
-			height: 20px;
+			height: 24px;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;

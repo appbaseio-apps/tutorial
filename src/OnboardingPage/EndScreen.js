@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
-import { CopyOutlined } from '@ant-design/icons';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+// import { CopyOutlined } from '@ant-design/icons';
+// import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
 import trophyPng from './images/finish-screen/Trophy.png';
@@ -55,19 +55,19 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 												}}
 											>
 												<div className="overflow-text">{csbURL}</div>
-												<CopyToClipboard text={csbURL}>
+												{/* <CopyToClipboard text={csbURL}>
 													<CopyOutlined className="icon-active" />
-													{/* <Icon
+													<Icon
 														type="copy"
 														theme="outlined"
 														className="icon-active"
-													/> */}
-												</CopyToClipboard>
+													/>
+												</CopyToClipboard> */}
 												<a
 													target="_blank"
 													rel="noreferrer"
 													href={csbURL}
-													style={{ height: 20 }}
+													style={{ height: 22 }}
 												>
 													<img 
 														src="https://imgur.com/ZBcgHr3.png"
