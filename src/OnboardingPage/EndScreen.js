@@ -40,12 +40,7 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 											style={{ margin: 10 }}
 										/>
 									</div>
-									<p>
-										You
-										{"'"}
-										ve finished the tutorial.
-									</p>
-									<h3>Open the app you just built in codesandbox.io</h3>
+									<h3>Share the app you've just built using codesandbox.io</h3>
 									<div>										
 										<div className="header-card">
 											<div
@@ -65,12 +60,11 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 													href={csbURL}
 													style={{ height: 20 }}
 												>
-													<ShareAltOutlined
+													<LinkOutlined
 														style={{ fontSize: 18 }}
 														className="icon-active" 														
-													/>													
-												</a>
-												
+													/>									
+                                                </a>
 											</div>
 										</div>
 										{/* )} */}
