@@ -27,7 +27,7 @@ export default class Introduction extends Component {
 		return (
 			<div>
 				<div className="wrapper">
-					<div style={{ width: 70 }}>
+					<div style={{ width: 80 }}>
 						<img src={createSvg} alt="create app" />
 					</div>
 					<div className="content">

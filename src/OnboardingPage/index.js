@@ -88,6 +88,8 @@ export default class Tutorial extends Component {
 	setAppName = (newApp) => {
 		this.setState({
 			newApp,
+			searchFields: [],
+			facetFields: [],
 		});
 	};
 
