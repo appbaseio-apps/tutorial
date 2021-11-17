@@ -9,7 +9,7 @@ export default class Introduction extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			appName: 'movies-demo-app',
+			appName: props.selectedApp,
 		};
 	}
 
@@ -24,6 +24,7 @@ export default class Introduction extends Component {
 	render() {
 		const { nextScreen } = this.props;
 		const { appName } = this.state;
+		console.log(appName);
 		return (
 			<div>
 				<div className="wrapper">
@@ -55,11 +56,13 @@ export default class Introduction extends Component {
 									key={data.id}
 									onClick={() => this.handleChange(data, data.id)}
 								>
-									<img
-										src={data.url}
-										alt={data.alt}
-										style={{ height: '150px', width: '150px', margin: 20 }}
-									/>
+									<div style={{ width: 190 }}>
+										<img
+											src={data.url}
+											alt={data.alt}
+											style={{ height: '150px', width: '150px', margin: 20 }}
+										/>
+									</div>
 									<div>
 										<h3>{data.name}</h3>
 										<p>{data.description}</p>
@@ -78,8 +81,10 @@ export default class Introduction extends Component {
 Introduction.propTypes = {
 	nextScreen: PropTypes.func,
 	setAppName: PropTypes.func.isRequired,
+	selectedApp: PropTypes.string,
 };
 
 Introduction.defaultProps = {
 	nextScreen: null,
+	selectedApp: 'movies-demo-app',
 };

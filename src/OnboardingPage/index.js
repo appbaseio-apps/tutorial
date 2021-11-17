@@ -101,14 +101,15 @@ export default class Tutorial extends Component {
 
 	renderCurrentScreen = () => {
 		const {
- currentScreen, newApp, searchFields, facetFields,
-} = this.state;
+			currentScreen, newApp, searchFields, facetFields,
+		} = this.state;
 		const RenderScreen = screens[currentScreen];
 		let props = {};
 
 		if (currentScreen === 0) {
 			props = {
 				setAppName: this.setAppName,
+				selectedApp: newApp.id,
 			};
 		} else if (currentScreen === 1) {
 			props = {
