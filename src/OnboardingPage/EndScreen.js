@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
-// import { CopyOutlined } from '@ant-design/icons';
-// import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { ShareAltOutlined, CopyOutlined } from '@ant-design/icons';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
 import trophyPng from './images/finish-screen/Trophy.png';
@@ -31,21 +31,22 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 							<h2>Share what you've built</h2> {/* eslint-disable-line */}
 
 							<div style={{ width: '100%', marginTop: 15 }}>								
-								<div>									
-									<img
-										src={trophyPng}
-										srcSet={`${trophyPng} 245w, ${trophyPng2} 490w`}
-										alt="Trophy"
-										style={{ margin: 10 }}
-									/>
+								<div>
+									<div style={{ height: 190 }}>									
+										<img
+											src={trophyPng}
+											srcSet={`${trophyPng} 245w, ${trophyPng2} 490w`}
+											alt="Trophy"
+											style={{ margin: 10 }}
+										/>
+									</div>
 									<p>
 										You
 										{"'"}
 										ve finished the tutorial.
 									</p>
 									<h3>Open the app you just built in codesandbox.io</h3>
-									<div>
-										{/* {csbURL && ( */}
+									<div>										
 										<div className="header-card">
 											<div
 												style={{
@@ -55,29 +56,19 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 												}}
 											>
 												<div className="overflow-text">{csbURL}</div>
-												{/* <CopyToClipboard text={csbURL}>
-													<CopyOutlined className="icon-active" />
-													<Icon
-														type="copy"
-														theme="outlined"
-														className="icon-active"
-													/>
-												</CopyToClipboard> */}
+												<CopyToClipboard text={csbURL}>
+													<CopyOutlined className="icon-active" style={{ fontSize: 18 }} />													
+												</CopyToClipboard>
 												<a
 													target="_blank"
 													rel="noreferrer"
 													href={csbURL}
-													style={{ height: 22 }}
+													style={{ height: 20 }}
 												>
-													<img 
-														src="https://imgur.com/ZBcgHr3.png"
-														alt="share-icon"
-														style={{
-															height: 16,
-															width: 16,
-															marginBottom: 0,
-														}}													
-													/>
+													<ShareAltOutlined
+														style={{ fontSize: 18 }}
+														className="icon-active" 														
+													/>													
 												</a>
 												
 											</div>
@@ -89,16 +80,18 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 						</div>
 						<div className="small-card">
 							<h2>WEB APP</h2>
-
-							<img
-								style={{
-									width: '150px',
-									margin: '40px auto 20px',
-								}}
-								src={webAppPng}
-								srcSet={`${webAppPng} 245w, ${webApp2} 490w`}
-								alt="Webapp"
-							/>
+							<div style={{ height: 150 }}>
+								<img
+									style={{
+										width: '150px',
+										margin: '40px auto 20px',
+									}}
+									src={webAppPng}
+									srcSet={`${webAppPng} 245w, ${webApp2} 490w`}
+									alt="Webapp"
+								/>
+							</div>					
+							
 							<h3>Learn how to build a web app</h3>
 							<p>appbase.io UI components for building data-driven web apps.</p>
 							<a
@@ -115,7 +108,9 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 					<div className="card-row">
 						<div className="card">
 							<h2>MOBILE APP</h2>
-							<img src={reactNativeSvg} alt="Reactive search" />
+							<div style={{ height: 130 }}>
+								<img src={reactNativeSvg} alt="Reactive search" />
+							</div>
 							<p>appbase.io UI components for building mobile apps.</p>
 							<a
 								className="button"
@@ -128,7 +123,10 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 						</div>
 						<div className="card">
 							<h2>MAPS APP</h2>
-							<img src={mapsSvg} alt="Reactive maps" />
+							<div style={{ height: 130 }}>
+								<img src={mapsSvg} alt="Reactive maps" />
+							</div>
+							
 							<p>appbase.io UI components for building realtime geolocation apps.</p>
 							<a
 								className="button"
@@ -141,12 +139,15 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 						</div>
 						<div className="card">
 							<h2>APIs</h2>
-							<img
-								width="100px"
-								style={{ margin: '40px 0px 55px' }}
-								src={apiSvg}
-								alt="API"
-							/>
+							<div style={{ height: 130 }}>
+								<img
+									width="100px"
+									style={{ margin: '40px 0px 55px' }}
+									src={apiSvg}
+									alt="API"
+								/>
+							</div>
+							
 							<p>
 								Get started with the APIs for indexing, querying and searching data
 								with appbase.

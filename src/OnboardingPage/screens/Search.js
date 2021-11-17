@@ -171,7 +171,7 @@ export default class Search extends Component {
 		return (
 			<div>
 				<div className="wrapper">
-					<div>
+					<div style={{ width: 70 }}>
 						<img src={searchSvg} alt="search" />
 					</div>
 					<div className="content">

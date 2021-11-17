@@ -165,7 +165,12 @@ export default class Tutorial extends Component {
 					</div>
 					<ul>
 						<li>
-							<a className={currentScreen === 0 ? 'active' : null}>Select your app</a>
+							<a 
+								className={currentScreen === 0 ? 'active' : null}
+								onClick={() => this.setScreen(0)}
+							>
+									Select your app
+							</a>
 						</li>
 						<li>
 							<a
@@ -178,7 +183,7 @@ export default class Tutorial extends Component {
 						<li>
 							<a
 								className={currentScreen === 2 ? 'active' : null}
-								onClick={() => this.setScreen(1)}
+								onClick={() => this.setScreen(2)}
 							>
 								Set searchable fields
 							</a>
@@ -186,7 +191,7 @@ export default class Tutorial extends Component {
 						<li>
 							<a
 								className={currentScreen === 3 ? 'active' : null}
-								onClick={() => this.setScreen(2)}
+								onClick={() => this.setScreen(3)}
 							>
 								Set aggregation fields
 							</a>
@@ -194,7 +199,7 @@ export default class Tutorial extends Component {
 						<li>
 							<a
 								className={currentScreen === 4 ? 'active' : null}
-								onClick={() => this.setScreen(3)}
+								onClick={() => this.setScreen(4)}
 							>
 								Demo and next steps
 							</a>

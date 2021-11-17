@@ -190,7 +190,7 @@ export default class Search extends Component {
 		return (
 			<div>
 				<div className="wrapper">
-					<div>
+					<div style={{ width: 70 }}>
 						<img src={aggSvg} alt="aggregations" />
 					</div>
 					<div className="content">

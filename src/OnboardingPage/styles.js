@@ -57,7 +57,7 @@ const onboardingStyles = css`
 		}
 	}
 	.left {
-		width: 260px;
+		width: 300px;
 		height: 100%;
 		background-color: ${leftColor};
 		padding: 40px 20px;
@@ -105,7 +105,7 @@ const onboardingStyles = css`
 		}
 	}
 	.right {
-		width: calc(100% - 340px);
+		width: calc(100% - 300px);
 		height: 100%;
 		background-color: ${rightColor};
 		padding: 50px 20px;
@@ -495,6 +495,7 @@ const endScreenStyles = css`
 		.icon-active {
 			display: flex;
 			alignItems: center;
+			color: black;
 			&:hover {
 				color: blue;
 			}

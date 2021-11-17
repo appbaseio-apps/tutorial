@@ -32,7 +32,7 @@ const SampleDataset = function ({ nextScreen, selectedApp }) { // eslint-disable
 
 	return (
 		<div className="wrapper">
-			<div>
+			<div style={{ width: 70 }}>
 				<img src={importSvg} alt="importing data" />
 			</div>
 			<div className="content">
