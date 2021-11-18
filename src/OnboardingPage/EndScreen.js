@@ -40,7 +40,7 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 											style={{ margin: 10 }}
 										/>
 									</div>
-									<h3>Share the app you've just built using codesandbox.io</h3>
+									<h3>Share the app you&apos;ve just built using codesandbox.io</h3>
 									<div>										
 										<div className="header-card">
 											<div
