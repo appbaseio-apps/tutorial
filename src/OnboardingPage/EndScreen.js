@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { ShareAltOutlined, CopyOutlined } from '@ant-design/icons';
+import { LinkOutlined, CopyOutlined } from '@ant-design/icons';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
 import trophyPng from './images/finish-screen/Trophy.png';
