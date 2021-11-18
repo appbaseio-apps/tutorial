@@ -63,11 +63,10 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 													<LinkOutlined
 														style={{ fontSize: 18 }}
 														className="icon-active" 														
-													/>									
-                                                </a>
+													/>
+												</a>
 											</div>
 										</div>
-										{/* )} */}
 									</div>
 								</div>
 							</div>
