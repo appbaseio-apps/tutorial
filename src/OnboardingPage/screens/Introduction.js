@@ -34,8 +34,8 @@ export default class Introduction extends Component {
 						<header>
 							<h2>Choose a sample dataset to import from</h2>
 							<p>
-								We will be using the appbase.io dashboard to import this dataset
-								from.
+								The datasets are preloaded in a demo Elasticsearch cluster
+                                so you don&apos;t need to setup one right now.
 							</p>
 						</header>
 						<div>
