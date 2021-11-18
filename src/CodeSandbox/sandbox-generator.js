@@ -182,7 +182,8 @@ header {
     p {
         margin: 15px 0;
         font-size: 18px;
-        line-height: 28px; // max-width: 550px;
+        line-height: 28px; 
+        max-width: 550px;
     }
     img {
         width: 70px;
