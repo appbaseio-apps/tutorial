@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { ShareAltOutlined, CopyOutlined } from '@ant-design/icons';
+import { LinkOutlined, CopyOutlined } from '@ant-design/icons';
 import { endScreenStyles } from './styles';
 import FullHeader from './components/FullHeader';
 import trophyPng from './images/finish-screen/Trophy.png';
@@ -40,12 +40,7 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 											style={{ margin: 10 }}
 										/>
 									</div>
-									<p>
-										You
-										{"'"}
-										ve finished the tutorial.
-									</p>
-									<h3>Open the app you just built in codesandbox.io</h3>
+									<h3>Share the app you&apos;ve just built using codesandbox.io</h3>
 									<div>										
 										<div className="header-card">
 											<div
@@ -65,15 +60,13 @@ const EndScreen = function ({ location }) { //eslint-disable-line
 													href={csbURL}
 													style={{ height: 20 }}
 												>
-													<ShareAltOutlined
+													<LinkOutlined
 														style={{ fontSize: 18 }}
 														className="icon-active" 														
-													/>													
+													/>
 												</a>
-												
 											</div>
 										</div>
-										{/* )} */}
 									</div>
 								</div>
 							</div>
