@@ -24,7 +24,6 @@ export default class Introduction extends Component {
 	render() {
 		const { nextScreen } = this.props;
 		const { appName } = this.state;
-		console.log(appName);
 		return (
 			<div>
 				<div className="wrapper">
