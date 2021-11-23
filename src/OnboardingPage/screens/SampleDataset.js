@@ -20,7 +20,7 @@ const SampleDataset = function ({ nextScreen, selectedApp }) { // eslint-disable
 	function renderJSONBlock() {
 		return (
 			<div>
-				<p>Showing sample JSON of the selected app:</p>
+				<p>Showing sample JSON of the data for the selected app:</p>
 				<div
 					style={{ width: '650px' }}
 					className="code-block"
