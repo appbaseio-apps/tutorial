@@ -465,19 +465,19 @@ const geoLayout = (reactArr) => { //eslint-disable-line
             showMapStyles
             renderData={(result) => ({
               custom: (
-                  <div
-                      style={{
-                          background: 'dodgerblue',
-                          color: '#fff',
-                          paddingLeft: 5,
-                          paddingRight: 5,
-                          borderRadius: 3,
-                          padding: 10,
-                      }}
-                  >
-                      <i className="fas fa-globe-europe" />
-                      &nbsp;{result.magnitude}
-                  </div>
+                <div
+                  style={{
+                    background: 'dodgerblue',
+                    color: '#fff',
+                    paddingLeft: 5,
+                    paddingRight: 5,
+                    borderRadius: 3,
+                    padding: 10,
+                  }}
+                >
+                  <i className="fas fa-globe-europe" />
+                  &nbsp;{result.magnitude}
+                </div>
               ),
             })}
             renderAllData={(                 
@@ -490,11 +490,11 @@ const geoLayout = (reactArr) => { //eslint-disable-line
             ) => {
               return (
                 <div style={{ width: '100%', height: '100%' }}>
-                    <div className="stat-styles">
-                        {meta.resultStats.numberOfResults} results found in{' '}
-                        {meta.resultStats.time}ms
-                    </div>
-                    {renderMap()}
+                  <div className="stat-styles">
+                    {meta.resultStats.numberOfResults} results found in{' '}
+                    {meta.resultStats.time}ms
+                  </div>
+                  {renderMap()}
                 </div>
               );
             }}
@@ -515,8 +515,8 @@ const ecommLayout = (reactArr) => `
             and: ${reactArr}
           }}
           innerClass={{
-              listItem: 'list-item',
-              resultStats: 'result-stats',
+            listItem: 'list-item',
+            resultStats: 'result-stats',
           }}
           render={({ data }) => (
             <ReactiveList.ResultListWrapper>
@@ -557,18 +557,18 @@ const ecommLayout = (reactArr) => `
                             <p> Rs.{item.retail_price}</p>
                             {item.brand && (
                               <p>
-                                  <p
-                                      style={{
-                                          marginLeft: 40,
-                                          fontWeight: '600',
-                                          marginRight: 5,
-                                      }}
-                                  >
-                                      Brand:{' '}
-                                  </p>
-                                  <p>{item.brand}</p>
+                                <p
+                                  style={{
+                                    marginLeft: 40,
+                                    fontWeight: '600',
+                                    marginRight: 5,
+                                  }}
+                                >
+                                  Brand:{' '}
+                                </p>
+                                <p>{item.brand}</p>
                               </p>
-                          )}                     
+                            )}                     
                           </div>
                           <p
                             style={{
@@ -583,17 +583,17 @@ const ecommLayout = (reactArr) => `
                           /> 
                           <div>
                               {Array.isArray(item.categories) ? (
-                                  item.categories.map((category) => (
-                                      <Tag>{category}</Tag>
-                                  ))
+                                item.categories.map((category) => (
+                                  <Tag>{category}</Tag>
+                                ))
                               ) : (
-                                  <Tag>
-                                      <p
-                                          dangerouslySetInnerHTML={{
-                                              __html: item.categories,
-                                          }}
-                                      />
-                                  </Tag>
+                                <Tag>
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                        __html: item.categories,
+                                    }}
+                                  />
+                                </Tag>
                               )}
                           </div>                   
                         </div>
