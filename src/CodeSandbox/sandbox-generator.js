@@ -1,6 +1,4 @@
-import React from 'react';
 import { getParameters } from 'codesandbox/lib/api/define';
-import reactElementToJSXString from 'react-element-to-jsx-string';
 import { searchSettings, facetMappings, URL } from '../OnboardingPage/utils/constants';
 
 const dependencies = {
@@ -85,18 +83,15 @@ ReactDOM.render(<App />, rootElement);
 
 const renderHeading = (app) => {
 	if (app === 'movies-demo-app') {
-		return `
-        <h2 className="header-heading">
+		return `<h2 className="header-heading">
             The Movies Store{' '}
             <span role="img" aria-label="books">
                 🎥
             </span>
-        </h2>
-        `;
+        </h2>`;
 	}
 	if (app === 'ecomm-demo-app') {
-		return `
-        <h2 className="header-heading">
+		return `<h2 className="header-heading">
             The Products Store{' '}
             <span role="img" aria-label="books">
                 💻
@@ -104,8 +99,7 @@ const renderHeading = (app) => {
         </h2>
     `;
 	}
-	return `
-        <h2 className="header-heading">
+	return `<h2 className="header-heading">
             The Geo Data{' '}
             <span role="img" aria-label="books">
                 🌎
@@ -117,9 +111,10 @@ const renderHeading = (app) => {
 const generateAppCode = ({ searchCode, filtersCode, resultCode, app }) => `
 import React from 'react';
 import {
-    DataSearch,
-    DynamicRangeSlider,
-    MultiList,
+  DataSearch,
+  DynamicRangeSlider,
+  RangeSlider,
+  MultiList,
 	ReactiveBase,
 	ReactiveList,
 	ResultList,
@@ -135,32 +130,34 @@ import "antd/dist/antd.css";
 const App = () => {
 	return (
 		<ReactiveBase 
-            app="${app}" 
-            url="${URL}"
-            enableAppbase 
-            className="search-app"
-            mapKey="AIzaSyA9JzjtHeXg_C_hh_GdTBdLxREWdj3nsOU"
-            theme={{
-                colors: {
-                    primaryColor: '#FF307A',
-                },
-            }}
-            style={{
-                backgroundColor: '#fff',
-                padding: '40px',
-                borderRadius: '2px',
-                textAlign: 'left',
-            }}
-        >
+      app="${app}" 
+      url="${URL}"
+      enableAppbase 
+      className="search-app"
+      mapKey="AIzaSyA9JzjtHeXg_C_hh_GdTBdLxREWdj3nsOU"
+      theme={{
+          colors: {
+              primaryColor: '#FF307A',
+          },
+      }}
+      style={{
+          backgroundColor: '#fff',
+          padding: '40px',
+          borderRadius: '2px',
+          textAlign: 'left',
+      }}
+    >
 			<header className="header-container">
-                ${renderHeading(app)}
-                ${searchCode}
-            </header>
-            <SelectedFilters style={{ marginTop: 20 }} showClearAll={false} />
-            <div className="multi-col">
-                <div className="left-col">${filtersCode}</div>
-                ${resultCode}
-            </div>				
+        ${renderHeading(app)}
+        ${searchCode}
+      </header>
+      <SelectedFilters style={{ marginTop: 20 }} showClearAll={false} />
+      <div className="multi-col">
+        <div className="left-col">
+          ${filtersCode}
+        </div>
+        ${resultCode}
+      </div>				
 		</ReactiveBase>
 	)
 };
@@ -370,262 +367,256 @@ const generateResultCode = (facetFields, app) => {
 };
 
 const moviesLayout = (reactArr) => `
-    <ReactiveList
-    componentId="results"
-    dataField="_score"
-    size={5}
-    pagination
-    URLParams
-    react={{
-      and: ${reactArr}
-    }}
-    render={({ data }) => (
-      <ReactiveList.ResultListWrapper>
-        {data.map((item) => (
-          <div
-            style={{
-              display: "flex",
-              padding: 10,
-              borderBottom: "1px solid rgb(239, 239, 239)"
-            }}
-          >
-            <img
-              style={{
-                height: 160,
-                width: 160,
-                objectFit: "contain"
-              }}
-              src={item.poster_path}
-              alt={item.poster_path}
-              onError={(event) => {
-                event.target.src =
-                  "https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg"; // eslint-disable-line no-param-reassign
-              }}
-            />
-            <ResultList key={item._id} id={item._id}>
-              <ResultList.Content>
-                <ResultList.Title
-                  dangerouslySetInnerHTML={{
-                    __html: item.original_title
+        <ReactiveList
+          componentId="results"
+          dataField="_score"
+          size={5}
+          pagination
+          URLParams
+          react={{
+            and: ${reactArr}
+          }}
+          render={({ data }) => (
+            <ReactiveList.ResultListWrapper>
+              {data.map((item) => (
+                <div
+                  style={{
+                    display: "flex",
+                    padding: 10,
+                    borderBottom: "1px solid rgb(239, 239, 239)"
                   }}
-                />
-                <ResultList.Description>
-                  <div>
-                    <div style={{ display: "flex", color: "#424242" }}>
-                      <p style={{ fontWeight: "600", marginRight: 5 }}>
-                        Release Year{" "}
-                      </p>
-                      <p> {item.release_year}</p>
-                      <p>
-                        <StarTwoTone                         
-                          style={{ marginLeft: 40, marginRight: 3 }}                         
-                        />{" "} 
-                        {item.vote_average}/10
-                      </p>
-                    </div>
-                    <p
-                      style={{
-                        color: "#888",
-                        margin: "8px 0",
-                        fontSize: "13px",
-                        lineHeight: "18px"
-                      }}
-                      dangerouslySetInnerHTML={{
-                        __html: item.overview
-                      }}
-                    />
-                    <div>
-                    {item.genres.map((genre, index) => (
-                      <Tag>{genre}</Tag>
-                    ))}
-                  </div>
-                  </div>
-                </ResultList.Description>
-              </ResultList.Content>
-            </ResultList>
-          </div>
-        ))}
-      </ReactiveList.ResultListWrapper>
-    )}
-  />
-    `;
+                >
+                  <img
+                    style={{
+                      height: 160,
+                      width: 160,
+                      objectFit: "contain"
+                    }}
+                    src={item.poster_path}
+                    alt={item.poster_path}
+                    onError={(event) => {
+                      event.target.src =
+                        "https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg"; // eslint-disable-line no-param-reassign
+                    }}
+                  />
+                  <ResultList key={item._id} id={item._id}>
+                    <ResultList.Content>
+                      <ResultList.Title
+                        dangerouslySetInnerHTML={{
+                          __html: item.original_title
+                        }}
+                      />
+                      <ResultList.Description>
+                        <div>
+                          <div style={{ display: "flex", color: "#424242" }}>
+                            <p style={{ fontWeight: "600", marginRight: 5 }}>
+                              Release Year{" "}
+                            </p>
+                            <p> {item.release_year}</p>
+                            <p>
+                              <StarTwoTone                         
+                                style={{ marginLeft: 40, marginRight: 3 }}                         
+                              />{" "} 
+                              {item.vote_average}/10
+                            </p>
+                          </div>
+                          <p
+                            style={{
+                              color: "#888",
+                              margin: "8px 0",
+                              fontSize: "13px",
+                              lineHeight: "18px"
+                            }}
+                            dangerouslySetInnerHTML={{
+                              __html: item.overview
+                            }}
+                          />
+                          <div>
+                          {item.genres.map((genre, index) => (
+                            <Tag>{genre}</Tag>
+                          ))}
+                        </div>
+                        </div>
+                      </ResultList.Description>
+                    </ResultList.Content>
+                  </ResultList>
+                </div>
+              ))}
+            </ReactiveList.ResultListWrapper>
+          )}
+        />
+`;
 
 const geoLayout = (reactArr) => { //eslint-disable-line
 	return `
         <div style={{ margin: 10, width: '70%' }}>
-            <ReactiveOpenStreetMap
-                componentId="googleMap"
-                dataField="location"
-                defaultMapStyle='Light Monochrome'
-                title='Reactive Maps'
-                defaultZoom={6}
-                size={10}
-                style={{ zIndex: 0 }}
-                react={{
-                    and: ${reactArr}
-                }}
-                onPopoverClick={(item) => <div>{item.place}</div>}
-                showMapStyles
-                renderData={(result) => ({
-                    custom: (
-                        <div
-                            style={{
-                                background: 'dodgerblue',
-                                color: '#fff',
-                                paddingLeft: 5,
-                                paddingRight: 5,
-                                borderRadius: 3,
-                                padding: 10,
-                            }}
-                        >
-                            <i className="fas fa-globe-europe" />
-                            &nbsp;{result.magnitude}
-                        </div>
-                    ),
-                })}
-                renderAllData={(                 
-                    hits,
-					loadMore,
-					renderMap,
-					renderPagination,
-					triggerClickAnalytics,
-					meta,
-                ) => {
-                    return (
-                        <div style={{ width: '100%', height: '100%' }}>
-                            <div className="stat-styles">
-                                {meta.resultStats.numberOfResults} results found in{' '}
-                                {meta.resultStats.time}ms
-                            </div>
-                            {renderMap()}
-                        </div>
-                    );
-                }}
-            />
-        </div>
+          <ReactiveOpenStreetMap
+            componentId="googleMap"
+            dataField="location"
+            defaultMapStyle='Light Monochrome'
+            title='Reactive Maps'
+            defaultZoom={6}
+            size={10}
+            style={{ zIndex: 0 }}
+            react={{
+                and: ${reactArr}
+            }}
+            onPopoverClick={(item) => <div>{item.place}</div>}
+            showMapStyles
+            renderData={(result) => ({
+              custom: (
+                  <div
+                      style={{
+                          background: 'dodgerblue',
+                          color: '#fff',
+                          paddingLeft: 5,
+                          paddingRight: 5,
+                          borderRadius: 3,
+                          padding: 10,
+                      }}
+                  >
+                      <i className="fas fa-globe-europe" />
+                      &nbsp;{result.magnitude}
+                  </div>
+              ),
+            })}
+            renderAllData={(                 
+              hits,
+              loadMore,
+              renderMap,
+              renderPagination,
+              triggerClickAnalytics,
+              meta,
+            ) => {
+              return (
+                <div style={{ width: '100%', height: '100%' }}>
+                    <div className="stat-styles">
+                        {meta.resultStats.numberOfResults} results found in{' '}
+                        {meta.resultStats.time}ms
+                    </div>
+                    {renderMap()}
+                </div>
+              );
+            }}
+          />
+      </div>
     `;
 };
 
 const ecommLayout = (reactArr) => `
-    <ReactiveList
-    componentId="results"
-    dataField="_score"
-    size={5}
-    pagination
-    stream
-    URLParams
-    react={{
-      and: ${reactArr}
-    }}
-    innerClass={{
-        listItem: 'list-item',
-        resultStats: 'result-stats',
-    }}
-    render={({ data }) => (
-      <ReactiveList.ResultListWrapper>
-        {data.map((item) => (
-          <div
-            style={{
-              display: "flex",
-              padding: 10,
-              borderBottom: "1px solid rgb(239, 239, 239)"
-            }}
-          >
-            <img
-              style={{
-                height: 160,
-                width: 160,
-                objectFit: "contain"
-              }}
-              src={item.image[0]}
-              alt={item.image[0]}
-              onError={(event) => {
-                event.target.src =
-                  "https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg"; // eslint-disable-line no-param-reassign
-              }}
-            />
-            <ResultList key={item._id} id={item._id}>
-              <ResultList.Content>
-                <ResultList.Title
-                  dangerouslySetInnerHTML={{
-                    __html: item.product_name
+        <ReactiveList
+          componentId="results"
+          dataField="_score"
+          size={5}
+          pagination
+          stream
+          URLParams
+          react={{
+            and: ${reactArr}
+          }}
+          innerClass={{
+              listItem: 'list-item',
+              resultStats: 'result-stats',
+          }}
+          render={({ data }) => (
+            <ReactiveList.ResultListWrapper>
+              {data.map((item) => (
+                <div
+                  style={{
+                    display: "flex",
+                    padding: 10,
+                    borderBottom: "1px solid rgb(239, 239, 239)"
                   }}
-                />
-                <ResultList.Description>
-                  <div>
-                    <div style={{ display: "flex", color: "#424242" }}>
-                      <p style={{ fontWeight: "600", marginRight: 5 }}>
-                        Retail Price:{' '}
-                      </p>
-                      <p> Rs.{item.retail_price}</p>
-                      {item.brand && (
-                        <p>
-                            <p
-                                style={{
-                                    marginLeft: 40,
-                                    fontWeight: '600',
-                                    marginRight: 5,
-                                }}
-                            >
-                                Brand:{' '}
+                >
+                  <img
+                    style={{
+                      height: 160,
+                      width: 160,
+                      objectFit: "contain"
+                    }}
+                    src={item.image[0]}
+                    alt={item.image[0]}
+                    onError={(event) => {
+                      event.target.src =
+                        "https://www.houseoftara.com/shop/wp-content/uploads/2019/05/placeholder.jpg"; // eslint-disable-line no-param-reassign
+                    }}
+                  />
+                  <ResultList key={item._id} id={item._id}>
+                    <ResultList.Content>
+                      <ResultList.Title
+                        dangerouslySetInnerHTML={{
+                          __html: item.product_name
+                        }}
+                      />
+                      <ResultList.Description>
+                        <div>
+                          <div style={{ display: "flex", color: "#424242" }}>
+                            <p style={{ fontWeight: "600", marginRight: 5 }}>
+                              Retail Price:{' '}
                             </p>
-                            <p>{item.brand}</p>
-                        </p>
-                     )}                     
-                    </div>
-                    <p
-                      style={{
-                        color: "#888",
-                        margin: "8px 0",
-                        fontSize: "13px",
-                        lineHeight: "18px"
-                      }}
-                      dangerouslySetInnerHTML={{
-                        __html: item.description
-                      }}
-                    /> 
-                    <div>
-                        {Array.isArray(item.categories) ? (
-                            item.categories.map((category) => (
-                                <Tag>{category}</Tag>
-                            ))
-                        ) : (
-                            <Tag>
-                                <p
-                                    dangerouslySetInnerHTML={{
-                                        __html: item.categories,
-                                    }}
-                                />
-                            </Tag>
-                        )}
-                    </div>                   
-                  </div>
-                </ResultList.Description>
-              </ResultList.Content>
-            </ResultList>
-          </div>
-        ))}
-      </ReactiveList.ResultListWrapper>
-    )}
-  />
+                            <p> Rs.{item.retail_price}</p>
+                            {item.brand && (
+                              <p>
+                                  <p
+                                      style={{
+                                          marginLeft: 40,
+                                          fontWeight: '600',
+                                          marginRight: 5,
+                                      }}
+                                  >
+                                      Brand:{' '}
+                                  </p>
+                                  <p>{item.brand}</p>
+                              </p>
+                          )}                     
+                          </div>
+                          <p
+                            style={{
+                              color: "#888",
+                              margin: "8px 0",
+                              fontSize: "13px",
+                              lineHeight: "18px"
+                            }}
+                            dangerouslySetInnerHTML={{
+                              __html: item.description
+                            }}
+                          /> 
+                          <div>
+                              {Array.isArray(item.categories) ? (
+                                  item.categories.map((category) => (
+                                      <Tag>{category}</Tag>
+                                  ))
+                              ) : (
+                                  <Tag>
+                                      <p
+                                          dangerouslySetInnerHTML={{
+                                              __html: item.categories,
+                                          }}
+                                      />
+                                  </Tag>
+                              )}
+                          </div>                   
+                        </div>
+                      </ResultList.Description>
+                    </ResultList.Content>
+                  </ResultList>
+                </div>
+              ))}
+            </ReactiveList.ResultListWrapper>
+          )}
+        />
     `;
 
 const generateSearchCode = (searchProps) => { //eslint-disable-line
-	return reactElementToJSXString(
-		<div
-			{...searchProps} //eslint-disable-line
-			style={{
-				maxWidth: '400px',
-				margin: '0 auto',
-			}}
-			innerClass={{
-				input: 'heading-input',
-			}}
-		/>,
-		{
-			showFunctions: false,
-		},
-	).replace('div', 'DataSearch');
+  return `<DataSearch 
+          autosuggest={${searchProps.autosuggest}}
+          componentId="${searchProps.componentId}"
+          dataField={${JSON.stringify(searchProps.dataField)}}
+          filterLabel="${searchProps.filterLabel}"
+          highlight={${searchProps.highlight}}
+          placeholder="${searchProps.placeholder}"
+          showIcon={${searchProps.showIcon}}
+        />`;
 };
 
 const generateFiltersCode = (facetFields) => {
@@ -642,100 +633,86 @@ const generateFiltersCode = (facetFields) => {
 	return facetFields.reduce((agg, field) => {
 		let listCode = '';
 		if (facetMappings[field] === 'term') {
-			listCode = reactElementToJSXString(
-				<div
-					componentId={field}
-					dataField={`${field}.keyword`}
-					className="filter"
-					title={sentenceCase(field)}
-					filterLabel={sentenceCase(field)}
-					size={10}
-					sortBy="count"
-					react={{ and: listArr.filter((i) => i !== field) }}
-				/>,
-				{
-					showFunctions: false,
-				},
-			).replace('div', 'MultiList');
+      listCode = `
+          <MultiList
+            componentId="${field}"
+            dataField="${field}"
+            className="filter"
+            title="${sentenceCase(field)}"
+            filterLabel="${sentenceCase(field)}"
+            size={10}
+            sortBy="count"
+            react={{ and: ${JSON.stringify(listArr.filter((i) => i !== field))}}}
+          />`;
 		} else if (field === 'retail_price') {
-			listCode = reactElementToJSXString(
-				<div
-					componentId={field}
-					dataField={field}
-					key={field}
-					title="Retail Price (Rupees)"
-					filterLabel="Retail Price"
-					showHistogram
-					range={{
-						start: 10,
-						end: 10000,
-					}}
-				/>,
-			).replace('div', 'RangeInput');
+      listCode = `
+          <RangeInput 
+            componentId="${field}"
+            dataField="${field}"
+            key="${field}"
+            title="Retail Price (Rupees)"
+            filterLabel="Retail Price"
+            showHistogram
+            range={{
+              start: 10,
+              end: 10000,
+            }}
+          />`;
 		} else if (field === 'magnitude') {
-			listCode = reactElementToJSXString(
-				<div
-					componentId={field}
-					dataField={field}
-					key={field}
-					title="Magnitude (Richter)"
-					filterLabel="Magnitude"
-					showHistogram
-					rangeLabels={{
-						start: '0.0',
-						end: '10.0',
-					}}
-				/>,
-			).replace('div', 'RangeSlider');
+      listCode = `
+          <RangeSlider 
+            componentId="${field}"
+            dataField="${field}"
+            key="${field}"
+            title="Magnitude (Richter)"
+            filterLabel="Magnitude"
+            showHistogram
+            rangeLabels={{
+              start: '0.0',
+              end: '10.0',
+            }}
+          />`;
 		} else if (field === 'year') {
-			listCode = reactElementToJSXString(
-				<div
-					componentId={field}
-					dataField={field}
-					key={field}
-					title="Year"
-					filterLabel="Year"
-					showHistogram
-					range={{
-						start: 1970,
-						end: 2017,
-					}}
-				/>,
-			).replace('div', 'RangeInput');
+      listCode = `
+          <RangeInput 
+            componentId="${field}"
+            dataField="${field}"
+            key="${field}"
+            filterLabel="Year"
+            showHistogram
+            range={{
+              start: 1970,
+              end: 2017,
+            }}
+          />`;
 		} else if (field === 'release_year') {
-			listCode = reactElementToJSXString(
-				<div
-					componentId={field}
-					dataField={field}
-					key={field}
-					title="Release Year"
-					filterLabel="Release Year"
-					showHistogram
-					range={{
-						start: 1950,
-						end: 2021,
-					}}
-				/>,
-			).replace('div', 'RangeInput');
+      listCode = `
+          <RangeInput 
+            componentId="${field}"
+            dataField="${field}"
+            key="${field}"
+            title="Release Year"
+            filterLabel="Release Year"
+            showHistogram
+            range={{
+              start: 1970,
+              end: 2017,
+            }}
+          />`;
 		} else {
-			listCode = reactElementToJSXString(
-				<div
-					dataField={field}
-					className="filter"
-					title={sentenceCase(field)}
-					componentId={field}
-					filterLabel={sentenceCase(field)}
-				/>,
-				{
-					showFunctions: false,
-				},
-			).replace('div', 'DynamicRangeSlider');
+      listCode = `
+          <DynamicRangeSlider
+            componentId="${field}"
+            dataField="${field}"        
+            title="${sentenceCase(field)}"
+            filterLabel="${sentenceCase(field)}"
+          />`;
 		}
 
 		if (agg) {
 			return `${agg}\n${listCode}`;
 		}
-		return `${listCode}`;
+		return listCode;
 	}, '');
 };
 
