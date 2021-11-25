@@ -636,7 +636,7 @@ const generateFiltersCode = (facetFields) => {
       listCode = `
           <MultiList
             componentId="${field}"
-            dataField="${field}"
+            dataField="${field}.keyword"
             className="filter"
             title="${sentenceCase(field)}"
             filterLabel="${sentenceCase(field)}"
